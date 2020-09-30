@@ -24,6 +24,206 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /routes:
+    post:
+      summary: Creates a route
+      operationId: createRoute
+      requestBody:
+        description: A route to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+      tags:
+        - Routes
+      responses:
+        '200':
+          description: A created route
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      summary: Lists all routes
+      operationId: listRoutes
+      tags:
+        - Routes
+      responses:
+        '200':
+          description: An array of routes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /routes/{routeId}:
+    get:
+      summary: Finds a route
+      operationId: findRoute
+      tags:
+        - Routes
+      parameters: 
+        - name: routeId
+          in: path
+          description: Route id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: A found route
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes a route
+      operationId: deleteRoute
+      tags:
+        - Routes
+      parameters: 
+        - name: routeId
+          in: path
+          description: Route id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /totalExposure:
+    get:
+      summary: Gets the total exposure of a user
+      operationId: totalExposure
+      tags:
+        - TotalExposure
+      responses:
+        '200':
+          description: The total exposure of a user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExposureInstance'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /exposureInstances:
+    post:
+      summary: Creates an exposure instance
+      operationId: createExposureInstance
+      requestBody:
+        description: An exposure instance to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExposureInstance'
+      tags:
+        - ExposureInstances
+      responses:
+        '200':
+          description: A created exposure instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExposureInstance'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      summary: Lists exposure instances
+      operationId: listExposureInstances
+      tags:
+        - ExposureInstances
+      parameters: 
+        - name: createdBefore
+          in: query
+          description: Created before time
+          required: false
+          schema:
+            type: "string"
+        - name: createdAfter
+          in: query
+          description: Created after time
+          required: false
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: An array of exposure instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExposureInstance'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /exposureInstances/{exposureInstanceId}:
+    get:
+      summary: Finds an exposure instance
+      operationId: findExposureInstance
+      tags:
+        - ExposureInstances
+      parameters: 
+        - name: exposureInstanceId
+          in: path
+          description: Exposure instance id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: A found exposure instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExposureInstance'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   securitySchemes:
     bearerAuth:
@@ -32,6 +232,43 @@ components:
       bearerFormat: JWT
 
   schemas:
+    ExposureInstance:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        routeId:
+          type: string
+          format: uuid
+        startedAt:
+          type: string
+          format: date-time
+        endedAt:
+          type: string
+          format: date-time
+        carbonMonoxide:
+          type: number
+        nitrogenMonoxide:
+          type: number
+        nitrogenDioxide:
+          type: number
+        ozone:
+          type: number
+        sulfurDioxide:
+          type: number
+        harmfulMicroparticles:
+          type: number
+    Route:
+      type: object
+      required:
+        - routePoints
+      properties:
+        id:
+          type: string
+          format: uuid
+        routePoints:
+          type: string
     Error:
       type: object
       required:
