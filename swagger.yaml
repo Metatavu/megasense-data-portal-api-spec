@@ -121,7 +121,7 @@ paths:
                 $ref: '#/components/schemas/Error'
   /totalExposure:
     get:
-      summary: Gets the total exposure of an user
+      summary: Gets the total exposure of a user
       operationId: totalExposure
       tags:
         - TotalExposure
