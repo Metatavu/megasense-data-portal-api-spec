@@ -127,7 +127,7 @@ paths:
         - TotalExposure
       responses:
         '200':
-          description: The total exposure of an user
+          description: The total exposure of a user
           content:
             application/json:
               schema:
