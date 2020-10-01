@@ -125,6 +125,19 @@ paths:
       operationId: totalExposure
       tags:
         - TotalExposure
+      parameters: 
+        - name: exposedBefore
+          in: query
+          description: Exposed before time
+          required: false
+          schema:
+            type: "string"
+        - name: exposedAfter
+          in: query
+          description: Exposed after time
+          required: false
+          schema:
+            type: "string"
       responses:
         '200':
           description: The total exposure of a user
@@ -249,16 +262,22 @@ components:
           format: date-time
         carbonMonoxide:
           type: number
+          format: float
         nitrogenMonoxide:
           type: number
+          format: float
         nitrogenDioxide:
           type: number
+          format: float
         ozone:
           type: number
+          format: float
         sulfurDioxide:
           type: number
+          format: float
         harmfulMicroparticles:
           type: number
+          format: float
     Route:
       type: object
       required:
