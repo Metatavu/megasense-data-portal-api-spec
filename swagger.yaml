@@ -251,9 +251,9 @@ paths:
           required: true
           schema:
             type: string
-        - name: treshold
+        - name: precision
           in: query
-          description: Treshold for values to be returned
+          description: Precision in meters for the data that is returned
           required: true
           schema:
             type: number
