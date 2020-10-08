@@ -250,7 +250,7 @@ paths:
           description: pollutant type
           required: true
           schema:
-            $ref: '#/components/schemas/PollutantType'
+            type: string
         - name: treshold
           in: query
           description: Treshold for values to be returned
@@ -267,18 +267,6 @@ paths:
         - name: boundingBoxCorner2
           in: query
           description: Coordinates for the second corner of the bounding box
-          required: true
-          schema:
-            type: string
-        - name: boundingBoxCorner3
-          in: query
-          description: Coordinates for the the third corner of the bounding box
-          required: true
-          schema:
-            type: string
-        - name: boundingBoxCorner4
-          in: query
-          description: Coordinates for the the fourth corner of the bounding box
           required: true
           schema:
             type: string
@@ -363,12 +351,12 @@ components:
     PollutantType:
       type: string
       enum:
-        - carbonMonoxide
-        - nitrogenMonoxide
-        - nitrogenDioxide
-        - ozone
-        - sulfurDioxide
-        - microParticles
+        - CARBON_MONOXIDE
+        - NITROGEN_MONOXIDE
+        - NITROGEN_DIOXDIE
+        - OZONE
+        - SULFUR_DIOXIDE
+        - MICRO_PARTICLES
       
     Location:
       type: object
