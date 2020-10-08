@@ -237,6 +237,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    
+  /airQuality:
+    get:
+      summary: Get air quality data
+      operationId: getAirQuality
+      tags:
+        - AirQuality
+      parameters: 
+        - name: pollutant
+          in: query
+          description: pollutant type
+          required: true
+          schema:
+            $ref: '#/components/schemas/PollutantType'
+        - name: treshold
+          in: query
+          description: Treshold for values to be returned
+          required: true
+          schema:
+            type: number
+            format: float
+        - name: bounds
+          in: query
+          description: Bounds for the area to get air quality from
+          required: true
+          schema:
+            type: object
+            properties:
+              corner1:
+                $ref: '#/components/schemas/Location'
+              corner2:
+                $ref: '#/components/schemas/Location'
+              corner3:
+                $ref: '#/components/schemas/Location'
+              corner4:
+                $ref: '#/components/schemas/Location'
+      responses:
+        '200':
+          description: Air quality values
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AirQuality'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   securitySchemes:
     bearerAuth:
@@ -299,3 +350,43 @@ components:
           format: int32
         message:
           type: string
+          
+    PollutantType:
+      type: string
+      enum:
+        - CARBON_MONOXIDE
+        - NITROGEN_MONOXIDE
+        - NITROGEN_DIOXIDE
+        - OZONE
+        - SULFUR_DIOXIDE
+        - MICRO_PARTICLES
+      
+    Location:
+      type: object
+      required:
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
+      
+    AirQuality:
+      type: object
+      required:
+        - pollutionValue
+        - pollutant
+        - location
+      properties:
+        pollutionValue:
+          type: number
+          format: float
+        pollutant:
+          type: object
+          $ref: '#/components/schemas/PollutantType'
+        location:
+          type: object
+          $ref: '#/components/schemas/Location'
