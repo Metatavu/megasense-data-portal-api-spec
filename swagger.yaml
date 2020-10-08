@@ -260,13 +260,13 @@ paths:
             format: float
         - name: boundingBoxCorner1
           in: query
-          description: Coordinates for the first corner of the bounding box
+          description: Coordinates for the lower left of the bounding box
           required: true
           schema:
             type: string
         - name: boundingBoxCorner2
           in: query
-          description: Coordinates for the second corner of the bounding box
+          description: Coordinates for the upper right of the bounding box
           required: true
           schema:
             type: string
