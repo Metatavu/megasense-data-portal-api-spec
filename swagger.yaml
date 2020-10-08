@@ -353,7 +353,7 @@ components:
       enum:
         - CARBON_MONOXIDE
         - NITROGEN_MONOXIDE
-        - NITROGEN_DIOXDIE
+        - NITROGEN_DIOXIDE
         - OZONE
         - SULFUR_DIOXIDE
         - MICRO_PARTICLES
