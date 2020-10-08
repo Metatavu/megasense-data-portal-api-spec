@@ -258,21 +258,30 @@ paths:
           schema:
             type: number
             format: float
-        - name: bounds
+        - name: boundingBoxCorner1
           in: query
-          description: Bounds for the area to get air quality from
+          description: Coordinates for the first corner of the bounding box
           required: true
           schema:
-            type: object
-            properties:
-              corner1:
-                $ref: '#/components/schemas/Location'
-              corner2:
-                $ref: '#/components/schemas/Location'
-              corner3:
-                $ref: '#/components/schemas/Location'
-              corner4:
-                $ref: '#/components/schemas/Location'
+            type: string
+        - name: boundingBoxCorner2
+          in: query
+          description: Coordinates for the second corner of the bounding box
+          required: true
+          schema:
+            type: string
+        - name: boundingBoxCorner3
+          in: query
+          description: Coordinates for the the third corner of the bounding box
+          required: true
+          schema:
+            type: string
+        - name: boundingBoxCorner4
+          in: query
+          description: Coordinates for the the fourth corner of the bounding box
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Air quality values
