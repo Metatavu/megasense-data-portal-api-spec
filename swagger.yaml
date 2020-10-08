@@ -363,12 +363,12 @@ components:
     PollutantType:
       type: string
       enum:
-        - CARBON_MONOXIDE
-        - NITROGEN_MONOXIDE
-        - NITROGEN_DIOXIDE
-        - OZONE
-        - SULFUR_DIOXIDE
-        - MICRO_PARTICLES
+        - carbon_monoxide
+        - nitrogen_monoxide
+        - nitrogen_dioxide
+        - ozone
+        - sulfur_dioxide
+        - micro_particles
       
     Location:
       type: object
