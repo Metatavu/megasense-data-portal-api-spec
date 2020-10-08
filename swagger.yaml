@@ -257,7 +257,7 @@ paths:
           required: true
           schema:
             type: number
-            format: float
+            format: integer
         - name: boundingBoxCorner1
           in: query
           description: Coordinates for the lower left of the bounding box
