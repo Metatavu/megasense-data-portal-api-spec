@@ -331,6 +331,7 @@ components:
         - routePoints
         - locationFromName
         - locationToName
+        - savedAt
       properties:
         id:
           type: string
