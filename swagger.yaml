@@ -329,11 +329,17 @@ components:
       type: object
       required:
         - routePoints
+        - locationFromName
+        - locationToName
       properties:
         id:
           type: string
           format: uuid
         routePoints:
+          type: string
+        locationFromName:
+          type: string
+        locationToName:
           type: string
     Error:
       type: object
