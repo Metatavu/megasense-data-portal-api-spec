@@ -462,6 +462,9 @@ components:
         pollutant:
           type: object
           $ref: '#/components/schemas/PollutantType'
+        location:
+          type: object
+          $ref: '#/components/schemas/Location'
     
     UserSettings:
       type: object
