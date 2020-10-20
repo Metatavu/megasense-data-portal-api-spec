@@ -284,6 +284,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  
+  /airQuality/{coordinates}:
+    get:
+      summary: Get air quality for specific coordinates
+      operationId: getAirQualityForCoordinates
+      tags:
+        - AirQuality
+      parameters:
+        - name: coordinates
+          in: path
+          description: Coordinates for air quality
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The air quality for a specific coordinate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AirQuality'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
                 
   /userSettings:
     get:
