@@ -497,4 +497,25 @@ components:
       type: object
       properties:
         homeAddress:
+          type: object
+          $ref: '#/components/schemas/HomeAddress'
+    
+    HomeAddress:
+      type: object
+      required:
+        - streetName
+        - houseNumber
+        - postalCode
+        - city
+        - country
+      properties:
+        streetName:
+          type: string
+        houseNumber:
+          type: integer
+        postalCode:
+          type: string
+        city:
+          type: string
+        country:
           type: string
