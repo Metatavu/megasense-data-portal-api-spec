@@ -503,7 +503,7 @@ components:
     HomeAddress:
       type: object
       required:
-        - streetName
+        - streetAddress
         - postalCode
         - city
         - country
