@@ -381,6 +381,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  
+  /users:
+    delete:
+      summary: Deletes the user who is logged in and all their data
+      operationId: deleteUser
+      tags:
+        - Users
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      
 components:
   securitySchemes:
     bearerAuth:
