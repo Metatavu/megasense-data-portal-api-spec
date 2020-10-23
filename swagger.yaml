@@ -317,7 +317,7 @@ paths:
       summary: Gets user settings of the user who is logged in
       operationId: getUserSettings
       tags:
-        - UserSettings
+        - Users
       responses:
         '200':
           description: User settings
@@ -335,7 +335,7 @@ paths:
       summary: Creates user settings for the user who is logged in
       operationId: createUserSettings
       tags:
-        - UserSettings
+        - Users
       requestBody:
         description: New user settings
         required: true
@@ -360,7 +360,7 @@ paths:
       summary: Updates user settings for the user who is logged in
       operationId: updateUserSettings
       tags:
-        - UserSettings
+        - Users
       requestBody:
         description: New user settings
         required: true
@@ -391,6 +391,27 @@ paths:
       responses:
         '204':
           description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /userData:
+    get:
+      summary: Downloads the data of the user who is logged in
+      operationId: downloadUserData
+      tags:
+        - Users
+      responses:
+        '200':
+          description: User data
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
         default:
           description: unexpected error
           content:
