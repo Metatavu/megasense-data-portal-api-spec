@@ -397,6 +397,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  
+  /userData:
+    get:
+      summary: Downloads the data of the user who is logged in
+      operationId: getUserData
+      tags:
+        - UserData
+      responses:
+        '200':
+          description: User data
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       
 components:
   securitySchemes:
