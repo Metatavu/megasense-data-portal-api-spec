@@ -312,7 +312,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
                 
-  /userSettings:
+  /users/settings:
     get:
       summary: Gets user settings of the user who is logged in
       operationId: getUserSettings
@@ -398,7 +398,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
   
-  /userData:
+  /users/data:
     get:
       summary: Downloads the data of the user who is logged in
       operationId: downloadUserData
