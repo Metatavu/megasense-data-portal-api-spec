@@ -401,7 +401,7 @@ paths:
   /userData:
     get:
       summary: Downloads the data of the user who is logged in
-      operationId: getUserData
+      operationId: downloadUserData
       tags:
         - UserData
       responses:
