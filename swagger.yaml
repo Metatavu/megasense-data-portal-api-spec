@@ -317,7 +317,7 @@ paths:
       summary: Gets user settings of the user who is logged in
       operationId: getUserSettings
       tags:
-        - UserSettings
+        - Users
       responses:
         '200':
           description: User settings
@@ -335,7 +335,7 @@ paths:
       summary: Creates user settings for the user who is logged in
       operationId: createUserSettings
       tags:
-        - UserSettings
+        - Users
       requestBody:
         description: New user settings
         required: true
@@ -360,7 +360,7 @@ paths:
       summary: Updates user settings for the user who is logged in
       operationId: updateUserSettings
       tags:
-        - UserSettings
+        - Users
       requestBody:
         description: New user settings
         required: true
@@ -403,7 +403,7 @@ paths:
       summary: Downloads the data of the user who is logged in
       operationId: downloadUserData
       tags:
-        - UserData
+        - Users
       responses:
         '200':
           description: User data
