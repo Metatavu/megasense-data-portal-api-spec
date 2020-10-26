@@ -237,7 +237,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    
+    delete:
+      summary: Deletes an exposure instance
+      operationId: deleteExposureInstance
+      tags:
+        - ExposureInstances
+      parameters: 
+        - name: exposureInstanceId
+          in: path
+          description: Exposure instance id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /airQuality:
     get:
       summary: Get air quality data
