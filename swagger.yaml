@@ -402,6 +402,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes user settings of the user who is logged in
+      operationId: deleteUserSettings
+      tags:
+        - Users
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   
   /users:
     delete:
