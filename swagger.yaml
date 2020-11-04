@@ -477,7 +477,7 @@ paths:
       summary: Creates user favourites for a logged in user
       operationId: createUserFavouriteLocation
       tags:
-        - Users
+        - FavouriteLocations
       requestBody:
         description: New user favourites
         required: true
