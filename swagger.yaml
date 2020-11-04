@@ -524,7 +524,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     delete:
-      summary: Deletes user favourites for a logged in user
+      summary: Deletes an user favourite location
       operationId: deleteUserFavouriteLocation
       tags:
         - FavouriteLocations
