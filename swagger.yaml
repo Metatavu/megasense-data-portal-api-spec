@@ -525,7 +525,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     delete:
       summary: Deletes user favourites for a logged in user
-      operationId: deleteUserFavourites
+      operationId: deleteUserFavouriteLocation
       tags:
         - Users
       responses:
