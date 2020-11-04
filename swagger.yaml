@@ -479,7 +479,7 @@ paths:
       tags:
         - FavouriteLocations
       requestBody:
-        description: New user favourites
+        description: A new favourite location
         required: true
         content:
           application/json:
