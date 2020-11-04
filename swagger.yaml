@@ -527,7 +527,7 @@ paths:
       summary: Deletes user favourites for a logged in user
       operationId: deleteUserFavouriteLocation
       tags:
-        - Users
+        - FavouriteLocations
       responses:
         '204':
           description: Empty result indication of a successful removal
