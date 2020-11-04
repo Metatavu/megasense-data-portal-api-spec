@@ -502,7 +502,7 @@ paths:
       summary: Updates user favourites for a logged in user
       operationId: updateUserFavouriteLocation
       tags:
-        - Users
+        - FavouriteLocations
       requestBody:
         description: New user favourites
         required: true
