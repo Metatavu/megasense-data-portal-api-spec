@@ -454,7 +454,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
                 
-  /users/favourites:
+  /favourites:
     get:
       summary: Gets user favourite locations
       operationId: getUserFavourites
