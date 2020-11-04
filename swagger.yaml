@@ -500,7 +500,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       summary: Updates user favourites for a logged in user
-      operationId: updateUserFavourites
+      operationId: updateUserFavouriteLocation
       tags:
         - Users
       requestBody:
