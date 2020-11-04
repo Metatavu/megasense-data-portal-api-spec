@@ -475,7 +475,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       summary: Creates user favourites for a logged in user
-      operationId: createUserFavourites
+      operationId: createUserFavouriteLocation
       tags:
         - Users
       requestBody:
