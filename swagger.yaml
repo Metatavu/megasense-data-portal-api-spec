@@ -462,7 +462,7 @@ paths:
         - FavouriteLocations
       responses:
         '200':
-          description: User favourites
+          description: User favourite locations
           content:
             application/json:
               schema:
