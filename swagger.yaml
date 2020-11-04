@@ -459,7 +459,7 @@ paths:
       summary: Gets user favourite locations
       operationId: listUserFavouriteLocations
       tags:
-        - Users
+        - FavouriteLocations
       responses:
         '200':
           description: User favourites
