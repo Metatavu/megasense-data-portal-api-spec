@@ -457,7 +457,7 @@ paths:
   /favourites:
     get:
       summary: Gets user favourite locations
-      operationId: getUserFavourites
+      operationId: listUserFavouriteLocations
       tags:
         - Users
       responses:
