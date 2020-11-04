@@ -512,7 +512,7 @@ paths:
               $ref: '#/components/schemas/FavouriteLocation'  
       responses:
         '200':
-          description: User favourites
+          description: An updated favourite location
           content:
             application/json:
               schema:
