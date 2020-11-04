@@ -453,6 +453,90 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+                
+  /users/favourites:
+    get:
+      summary: Gets user favourite locations
+      operationId: getUserFavourites
+      tags:
+        - Users
+      responses:
+        '200':
+          description: User favourites
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FavouriteLocation'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Creates user favourites for a logged in user
+      operationId: createUserFavourites
+      tags:
+        - Users
+      requestBody:
+        description: New user favourites
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavouriteLocation'
+      responses:
+        '200':
+          description: User favourites
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FavouriteLocation'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Updates user favourites for a logged in user
+      operationId: updateUserFavourites
+      tags:
+        - Users
+      requestBody:
+        description: New user favourites
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FavouriteLocation'  
+      responses:
+        '200':
+          description: User favourites
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FavouriteLocation'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes user favourites for a logged in user
+      operationId: deleteUserFavourites
+      tags:
+        - Users
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
       
 components:
   securitySchemes:
@@ -589,3 +673,19 @@ components:
           type: string
         country:
           type: string
+          
+    FavouriteLocation:
+      type: object
+      required:
+        - name
+        - latitude
+        - longitude
+      properties:
+        name:
+          type: string
+        latitude:
+          type: number
+          format: float
+        longitude:
+          type: number
+          format: float
