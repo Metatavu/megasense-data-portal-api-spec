@@ -498,11 +498,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /favourites/{favouriteId}:
     put:
       summary: Updates details for an user favourite location
       operationId: updateUserFavouriteLocation
       tags:
         - FavouriteLocations
+      parameters: 
+        - name: favouriteId
+          in: path
+          description: Favourite id
+          required: true
+          schema:
+            type: string
+            format: uuid
       requestBody:
         description: New favourite location details
         required: true
@@ -528,6 +537,14 @@ paths:
       operationId: deleteUserFavouriteLocation
       tags:
         - FavouriteLocations
+      parameters: 
+        - name: favouriteId
+          in: path
+          description: Favourite id
+          required: true
+          schema:
+            type: string
+            format: uuid
       responses:
         '204':
           description: Empty result indication of a successful removal
