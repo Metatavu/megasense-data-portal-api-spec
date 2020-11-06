@@ -652,10 +652,14 @@ components:
     
     UserSettings:
       type: object
+      required:
+        - showMobileWelcomeScreen
       properties:
         homeAddress:
           type: object
           $ref: '#/components/schemas/HomeAddress'
+        showMobileWelcomeScreen:
+          type: boolean
     
     HomeAddress:
       type: object
