@@ -736,7 +736,7 @@ components:
         ozoneThreshold:
           type: number
           format: float
-        sulfurDioxidePThreshold:
+        sulfurDioxideThreshold:
           type: number
           format: float
         harmfulMicroparticlesThreshold:
