@@ -654,12 +654,17 @@ components:
       type: object
       required:
         - showMobileWelcomeScreen
+        - pollutantPenalties
+        - pollutantThresholds
       properties:
         homeAddress:
-          type: object
           $ref: '#/components/schemas/HomeAddress'
         showMobileWelcomeScreen:
           type: boolean
+        pollutantPenalties:
+          $ref: '#/components/schemas/PollutantPenalties'
+        pollutantThresholds:
+          $ref: '#/components/schemas/PollutantThresholds'
     
     HomeAddress:
       type: object
@@ -691,5 +696,49 @@ components:
           type: number
           format: float
         longitude:
+          type: number
+          format: float
+    
+    PollutantPenalties:
+      type: object
+      properties:
+        carbonMonoxidePenalty:
+          type: number
+          format: float
+        nitrogenMonoxidePenalty:
+          type: number
+          format: float
+        nitrogenDioxidePenalty:
+          type: number
+          format: float
+        ozonePenalty:
+          type: number
+          format: float
+        sulfurDioxidePenalty:
+          type: number
+          format: float
+        harmfulMicroparticlesPenalty:
+          type: number
+          format: float
+          
+    PollutantThresholds:
+      type: object
+      properties:
+        carbonMonoxideThreshold:
+          type: number
+          format: float
+        nitrogenMonoxideThreshold:
+          type: number
+          format: float
+        nitrogenDioxideThreshold:
+          type: number
+          format: float
+        ozoneThreshold:
+          type: number
+          format: float
+        sulfurDioxidePThreshold:
+          type: number
+          format: float
+        harmfulMicroparticlesThreshold:
           type: number
           format: float
