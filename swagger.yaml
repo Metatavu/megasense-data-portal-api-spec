@@ -599,6 +599,7 @@ components:
     Route:
       type: object
       required:
+        - name
         - routePoints
         - locationFromName
         - locationToName
@@ -606,6 +607,8 @@ components:
         id:
           type: string
           format: uuid
+        name:
+          type: string
         routePoints:
           type: string
         locationFromName:
