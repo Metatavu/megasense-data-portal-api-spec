@@ -462,11 +462,13 @@ paths:
         - FavouriteLocations
       responses:
         '200':
-          description: User favourite locations
+          description: An array of user favourite locations
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FavouriteLocation'
+                type: array
+                items:
+                  $ref: '#/components/schemas/FavouriteLocation'
         default:
           description: unexpected error
           content:
