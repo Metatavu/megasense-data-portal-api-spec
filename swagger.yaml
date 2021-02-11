@@ -5,7 +5,7 @@ info:
 security:
   - bearerAuth: []
 paths:
-  /system/ping:
+  /v1/system/ping:
     get:
       summary: System ping endpoint
       operationId: ping
@@ -17,6 +17,7 @@ paths:
           content:
             text/plain:
               schema:
+                type: string
                 description: Returns PING
         default:
           description: unexpected error
@@ -24,7 +25,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /routes:
+  /v1/routes:
     post:
       summary: Creates a route
       operationId: createRoute
@@ -70,7 +71,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /routes/{routeId}:
+  /v1/routes/{routeId}:
     get:
       summary: Finds a route
       operationId: findRoute
@@ -119,7 +120,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /totalExposure:
+  /v1/totalExposure:
     get:
       summary: Gets the total exposure of a user
       operationId: totalExposure
@@ -151,7 +152,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /exposureInstances:
+  /v1/exposureInstances:
     post:
       summary: Creates an exposure instance
       operationId: createExposureInstance
@@ -210,7 +211,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /exposureInstances/{exposureInstanceId}:
+  /v1/exposureInstances/{exposureInstanceId}:
     get:
       summary: Finds an exposure instance
       operationId: findExposureInstance
@@ -259,7 +260,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /airQuality:
+  /v1/airQuality:
     get:
       summary: Get air quality data
       operationId: getAirQuality
@@ -299,8 +300,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  
-  /airQuality/{coordinates}/{pollutant}:
+
+  /v1/airQuality/{coordinates}/{pollutant}:
     get:
       summary: Get air quality for specific coordinates
       operationId: getAirQualityForCoordinates
@@ -333,7 +334,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
                 
-  /users/settings:
+  /v1/users/settings:
     get:
       summary: Gets user settings of the user who is logged in
       operationId: getUserSettings
@@ -416,8 +417,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  
-  /users:
+
+  /v1/users:
     delete:
       summary: Deletes the user who is logged in and all their data
       operationId: deleteUser
@@ -432,8 +433,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  
-  /users/data:
+
+  /v1/users/data:
     get:
       summary: Downloads the data of the user who is logged in
       operationId: downloadUserData
@@ -454,7 +455,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
                 
-  /favourites:
+  /v1/favourites:
     get:
       summary: Gets user favourite locations
       operationId: listUserFavouriteLocations
@@ -500,7 +501,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /favourites/{favouriteId}:
+  /v1/favourites/{favouriteId}:
     put:
       summary: Updates details for an user favourite location
       operationId: updateUserFavouriteLocation
