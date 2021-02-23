@@ -301,6 +301,37 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /v1/routeAirQuality:
+    get:
+      summary: Get air quality data for route coordinates
+      operationId: getRouteAirQuality
+      tags:
+        - AirQuality
+      parameters:
+        - name: coordinates
+          in: query
+          description: coordinates array
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Air quality values for route
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RouteAirQuality'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
   /v1/airQuality/{coordinates}/{pollutant}:
     get:
       summary: Get air quality for specific coordinates
@@ -766,5 +797,34 @@ components:
           type: number
           format: float
         harmfulMicroparticlesThreshold:
+          type: number
+          format: float
+
+    RouteAirQuality:
+      type: object
+      required:
+        - location
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+        microParticlesPm10:
+          type: number
+          format: float
+        microParticlesPm25:
+          type: number
+          format: float
+        carbonMonoxide:
+          type: number
+          format: float
+        nitrogenMonoxide:
+          type: number
+          format: float
+        nitrogenDioxide:
+          type: number
+          format: float
+        ozone:
+          type: number
+          format: float
+        sulfurDioxide:
           type: number
           format: float
