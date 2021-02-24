@@ -270,21 +270,29 @@ paths:
         - name: pollutant
           in: query
           description: pollutant type
-          required: true
+          required: false
           schema:
             type: string
         - name: boundingBoxCorner1
           in: query
           description: Coordinates for the lower left of the bounding box
-          required: true
+          required: false
           schema:
             type: string
         - name: boundingBoxCorner2
           in: query
           description: Coordinates for the upper right of the bounding box
-          required: true
+          required: false
           schema:
             type: string
+        - name: coordinatesArray
+          in: query
+          description: coordinates of route
+          required:  false
+          schema:
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: Air quality values
@@ -294,37 +302,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AirQuality'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-
-  /v1/routeAirQuality:
-    get:
-      summary: Get air quality data for route coordinates
-      operationId: getRouteAirQuality
-      tags:
-        - AirQuality
-      parameters:
-        - name: coordinates
-          in: query
-          description: coordinates array
-          required: true
-          schema:
-            type: array
-            items:
-              type: string
-      responses:
-        '200':
-          description: Air quality values for route
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RouteAirQuality'
         default:
           description: unexpected error
           content:
@@ -686,8 +663,22 @@ components:
         longitude:
           type: number
           format: float
-      
+
     AirQuality:
+      type: object
+      required:
+        - pollutionValue
+        - pollutant
+        - location
+      properties:
+        location:
+          $ref: '#/components/schemas/Location'
+        pollutants:
+          type: array
+          items:
+            $ref: '#/components/schemas/AirQualityPollutant'
+
+    AirQualityPollutant:
       type: object
       required:
         - pollutionValue
@@ -700,10 +691,7 @@ components:
         pollutant:
           type: object
           $ref: '#/components/schemas/PollutantType'
-        location:
-          type: object
-          $ref: '#/components/schemas/Location'
-    
+
     UserSettings:
       type: object
       required:
@@ -797,34 +785,5 @@ components:
           type: number
           format: float
         harmfulMicroparticlesThreshold:
-          type: number
-          format: float
-
-    RouteAirQuality:
-      type: object
-      required:
-        - location
-      properties:
-        location:
-          $ref: '#/components/schemas/Location'
-        microParticlesPm10:
-          type: number
-          format: float
-        microParticlesPm25:
-          type: number
-          format: float
-        carbonMonoxide:
-          type: number
-          format: float
-        nitrogenMonoxide:
-          type: number
-          format: float
-        nitrogenDioxide:
-          type: number
-          format: float
-        ozone:
-          type: number
-          format: float
-        sulfurDioxide:
           type: number
           format: float
