@@ -132,13 +132,15 @@ paths:
           description: Exposed before time
           required: false
           schema:
-            type: "string"
+            type: string
+            format: date-time
         - name: exposedAfter
           in: query
           description: Exposed after time
           required: false
           schema:
-            type: "string"
+            type: string
+            format: date-time
       responses:
         '200':
           description: The total exposure of a user
@@ -189,13 +191,15 @@ paths:
           description: Created before time
           required: false
           schema:
-            type: "string"
+            type: string
+            format: date-time
         - name: createdAfter
           in: query
           description: Created after time
           required: false
           schema:
-            type: "string"
+            type: string
+            format:  date-time
       responses:
         '200':
           description: An array of exposure instances
