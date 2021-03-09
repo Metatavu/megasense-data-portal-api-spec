@@ -781,6 +781,10 @@ components:
 
     MedicalConditions:
       type: object
+      required:
+        - asthma
+        - ihd
+        - copd
       properties:
         asthma:
           type: boolean
