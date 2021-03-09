@@ -686,9 +686,7 @@ components:
         - showMobileWelcomeScreen
         - pollutantPenalties
         - pollutantThresholds
-        - asthma
-        - ihd
-        - copd
+        - medicalConditions
       properties:
         homeAddress:
           $ref: '#/components/schemas/HomeAddress'
@@ -698,12 +696,8 @@ components:
           $ref: '#/components/schemas/PollutantPenalties'
         pollutantThresholds:
           $ref: '#/components/schemas/PollutantThresholds'
-        asthma:
-          type: boolean
-        ihd:
-          type: boolean
-        copd:
-          type: boolean
+        medicalConditions:
+          $ref: '#/components/schemas/MedicalConditions'
     
     HomeAddress:
       type: object
@@ -784,3 +778,13 @@ components:
         harmfulMicroparticlesThreshold:
           type: number
           format: float
+
+    MedicalConditions:
+      type: object
+      properties:
+        asthma:
+          type: boolean
+        ihd:
+          type: boolean
+        copd:
+          type: boolean
