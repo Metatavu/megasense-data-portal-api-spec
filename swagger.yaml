@@ -553,7 +553,82 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-      
+
+  /v1/medicalConditions:
+    get:
+      summary: gets all the medical conditions
+      operationId: getMedicalConditions
+      tags:
+        - MedicalConditions
+      responses:
+        '200':
+          description: found medical conditions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedicalCondition'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Creates a new medical condition
+      operationId: createMedicalCondition
+      tags:
+        - MedicalConditions
+      requestBody:
+        description: New medical condition
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalCondition'
+      responses:
+        '200':
+          description: New medical condition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalCondition'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /v1/medicalConditions/{medicalConditionId}:
+    get:
+      summary: Finds a medical condition
+      operationId: findMedicalCondition
+      tags:
+        - MedicalConditions
+      parameters:
+        - name: medicalConditionId
+          in: path
+          description: medical condition id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: A found medical condition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalCondition'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 components:
   securitySchemes:
     bearerAuth:
@@ -686,7 +761,6 @@ components:
         - showMobileWelcomeScreen
         - pollutantPenalties
         - pollutantThresholds
-        - medicalConditions
       properties:
         homeAddress:
           $ref: '#/components/schemas/HomeAddress'
@@ -697,7 +771,10 @@ components:
         pollutantThresholds:
           $ref: '#/components/schemas/PollutantThresholds'
         medicalConditions:
-          $ref: '#/components/schemas/MedicalConditions'
+          type: array
+          items:
+            type: string
+            format: uuid
     
     HomeAddress:
       type: object
@@ -779,16 +856,15 @@ components:
           type: number
           format: float
 
-    MedicalConditions:
+    MedicalCondition:
       type: object
       required:
-        - asthma
-        - ihd
-        - copd
+        - conditionName
+        - conditionApproved
       properties:
-        asthma:
+        conditionName:
+          type: string
+        conditionApproved:
           type: boolean
-        ihd:
-          type: boolean
-        copd:
-          type: boolean
+        conditionPenalties:
+          $ref: '#/components/schemas/PollutantPenalties'
