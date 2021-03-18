@@ -628,6 +628,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes a medical condition
+      operationId: deleteMedicalCondition
+      tags:
+        - MedicalConditions
+      parameters:
+        - name: medicalConditionId
+          in: path
+          description: Medical condition id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 components:
   securitySchemes:
@@ -862,9 +884,14 @@ components:
         - conditionName
         - conditionApproved
       properties:
+        id:
+          type: string
+          format: uuid
         conditionName:
           type: string
         conditionApproved:
           type: boolean
         conditionPenalties:
           $ref: '#/components/schemas/PollutantPenalties'
+        conditionThresholds:
+          $ref: '#/components/schemas/PollutantThresholds'
