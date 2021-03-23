@@ -628,6 +628,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    put:
+      summary: Updates medical condition
+      operationId: updateMedicalCondition
+      tags:
+        - MedicalConditions
+      parameters:
+        - name: medicalConditionId
+          in: path
+          description: medical condition id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Updated medical condition
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalCondition'
+      responses:
+        '200':
+          description: Medical condition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalCondition'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     delete:
       summary: Deletes a medical condition
       operationId: deleteMedicalCondition
