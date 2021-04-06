@@ -314,7 +314,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /v1/airQuality/{coordinates}/{pollutant}:
+  /v1/airQuality/{coordinates}/{pollutantId}:
     get:
       summary: Get air quality for specific coordinates
       operationId: getAirQualityForCoordinates
