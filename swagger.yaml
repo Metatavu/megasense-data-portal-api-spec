@@ -684,6 +684,136 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /v1/pollutants:
+    get:
+      summary: Lists all pollutants
+      operationId: getPollutants
+      tags:
+        - Pollutants
+      responses:
+        '200':
+          description: found pollutants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pollutant'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Creates a new pollutant
+      operationId: createPollutant
+      tags:
+        - Pollutants
+      requestBody:
+        description: New pollutant
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pollutant'
+      responses:
+        '200':
+          description: Created pollutant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pollutant'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /v1/pollutants/{pollutantId}:
+    get:
+      summary: Finds a pollutant
+      operationId: findPollutant
+      tags:
+        - Pollutants
+      parameters:
+        - name: pollutantId
+          in: path
+          description: Pollutant id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: A found pollutant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pollutant'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Updates pollutant
+      operationId: updatePollutant
+      tags:
+        - Pollutants
+      parameters:
+        - name: pollutantId
+          in: path
+          description: Pollutant id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Updated pollutant
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pollutant'
+      responses:
+        '200':
+          description: Pollutant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pollutant'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes pollutant
+      operationId: deletePollutant
+      tags:
+        - Pollutants
+      parameters:
+        - name: pollutantId
+          in: path
+          description: Pollutant id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 components:
   securitySchemes:
     bearerAuth:
@@ -928,3 +1058,14 @@ components:
           $ref: '#/components/schemas/PollutantPenalties'
         conditionThresholds:
           $ref: '#/components/schemas/PollutantThresholds'
+
+    Pollutant:
+      type: object
+      required:
+        - pollutantName
+      properties:
+        id:
+          type: string
+          format: uuid
+        pollutantName:
+          type: string
