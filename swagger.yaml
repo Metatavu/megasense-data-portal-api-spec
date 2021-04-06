@@ -271,12 +271,13 @@ paths:
       tags:
         - AirQuality
       parameters: 
-        - name: pollutant
+        - name: pollutantId
           in: query
-          description: pollutant type
+          description: pollutant id
           required: false
           schema:
             type: string
+            format: uuid
         - name: boundingBoxCorner1
           in: query
           description: Coordinates for the lower left of the bounding box
@@ -326,12 +327,13 @@ paths:
           required: true
           schema:
             type: string
-        - name: pollutant
+        - name: pollutantId
           in: path
           description: Pollutant to get
           required: true
           schema:
             type: string
+            format: uuid
       responses:
         '200':
           description: The air quality for a specific coordinate
@@ -837,24 +839,11 @@ components:
         endedAt:
           type: string
           format: date-time
-        carbonMonoxide:
-          type: number
-          format: float
-        nitrogenMonoxide:
-          type: number
-          format: float
-        nitrogenDioxide:
-          type: number
-          format: float
-        ozone:
-          type: number
-          format: float
-        sulfurDioxide:
-          type: number
-          format: float
-        harmfulMicroparticles:
-          type: number
-          format: float
+        pollutionValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/PollutantValue'
+
     Route:
       type: object
       required:
@@ -888,17 +877,7 @@ components:
           format: int32
         message:
           type: string
-          
-    PollutantType:
-      type: string
-      enum:
-        - CARBON_MONOXIDE
-        - NITROGEN_MONOXIDE
-        - NITROGEN_DIOXIDE
-        - OZONE
-        - SULFUR_DIOXIDE
-        - MICRO_PARTICLES
-      
+
     Location:
       type: object
       required:
@@ -915,46 +894,30 @@ components:
     AirQuality:
       type: object
       required:
-        - pollutionValue
-        - pollutant
+        - pollutionValues
         - location
       properties:
         location:
           $ref: '#/components/schemas/Location'
-        pollutants:
+        pollutionValues:
           type: array
           items:
-            $ref: '#/components/schemas/AirQualityPollutant'
-
-    AirQualityPollutant:
-      type: object
-      required:
-        - pollutionValue
-        - pollutant
-        - location
-      properties:
-        pollutionValue:
-          type: number
-          format: float
-        pollutant:
-          type: object
-          $ref: '#/components/schemas/PollutantType'
+            $ref: '#/components/schemas/PollutantValue'
 
     UserSettings:
       type: object
       required:
         - showMobileWelcomeScreen
         - pollutantPenalties
-        - pollutantThresholds
       properties:
         homeAddress:
           $ref: '#/components/schemas/HomeAddress'
         showMobileWelcomeScreen:
           type: boolean
         pollutantPenalties:
-          $ref: '#/components/schemas/PollutantPenalties'
-        pollutantThresholds:
-          $ref: '#/components/schemas/PollutantThresholds'
+          type: array
+          items:
+            $ref: '#/components/schemas/PollutantProperties'
         medicalConditions:
           type: array
           items:
@@ -996,50 +959,6 @@ components:
         longitude:
           type: number
           format: float
-    
-    PollutantPenalties:
-      type: object
-      properties:
-        carbonMonoxidePenalty:
-          type: number
-          format: float
-        nitrogenMonoxidePenalty:
-          type: number
-          format: float
-        nitrogenDioxidePenalty:
-          type: number
-          format: float
-        ozonePenalty:
-          type: number
-          format: float
-        sulfurDioxidePenalty:
-          type: number
-          format: float
-        harmfulMicroparticlesPenalty:
-          type: number
-          format: float
-          
-    PollutantThresholds:
-      type: object
-      properties:
-        carbonMonoxideThreshold:
-          type: number
-          format: float
-        nitrogenMonoxideThreshold:
-          type: number
-          format: float
-        nitrogenDioxideThreshold:
-          type: number
-          format: float
-        ozoneThreshold:
-          type: number
-          format: float
-        sulfurDioxideThreshold:
-          type: number
-          format: float
-        harmfulMicroparticlesThreshold:
-          type: number
-          format: float
 
     MedicalCondition:
       type: object
@@ -1055,9 +974,21 @@ components:
         conditionApproved:
           type: boolean
         conditionPenalties:
-          $ref: '#/components/schemas/PollutantPenalties'
-        conditionThresholds:
-          $ref: '#/components/schemas/PollutantThresholds'
+          items:
+            $ref: '#/components/schemas/PollutantProperties'
+
+    PollutantProperties:
+      type: object
+      properties:
+        pollutantId:
+          type: string
+          format: uuid
+        penalty:
+          type: number
+          format: float
+        threshold:
+          type: number
+          format: float
 
     Pollutant:
       type: object
@@ -1069,3 +1000,14 @@ components:
           format: uuid
         pollutantName:
           type: string
+
+    PollutantValue:
+      type: object
+      properties:
+        pollutantId:
+          type: string
+          format: uuid
+        value:
+          type: number
+          format: float
+
