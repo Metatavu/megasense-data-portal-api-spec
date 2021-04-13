@@ -816,6 +816,136 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /v1/pollutantProperties:
+    get:
+      summary: Lists all pollutant properties
+      operationId: getPollutantProperties
+      tags:
+        - PollutantProperties
+      responses:
+        '200':
+          description: found pollutants properties
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PollutantProperty'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Creates a new pollutant
+      operationId: createPollutantProperty
+      tags:
+        - PollutantProperties
+      requestBody:
+        description: New pollutant property
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PollutantProperty'
+      responses:
+        '200':
+          description: Created pollutant property
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PollutantProperty'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /v1/pollutantProperties/{pollutantPropertyId}:
+    get:
+      summary: Finds a pollutant property
+      operationId: findPollutantProperty
+      tags:
+        - PollutantProperties
+      parameters:
+        - name: pollutantPropertyId
+          in: path
+          description: Pollutant property id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: A found pollutant property
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PollutantProperty'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Updates pollutant property
+      operationId: updatePollutantProperty
+      tags:
+        - PollutantProperties
+      parameters:
+        - name: pollutantPropertyId
+          in: path
+          description: Pollutant property id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Updated pollutant property
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PollutantProperty'
+      responses:
+        '200':
+          description: Updated pollutant property
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PollutantProperty'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes pollutant property
+      operationId: deletePollutantProperty
+      tags:
+        - PollutantProperties
+      parameters:
+        - name: pollutantPropertyId
+          in: path
+          description: Pollutant property id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 components:
   securitySchemes:
     bearerAuth:
@@ -917,7 +1047,8 @@ components:
         pollutantProperties:
           type: array
           items:
-            $ref: '#/components/schemas/PollutantProperties'
+            type: string
+            format: uuid
         medicalConditions:
           type: array
           items:
@@ -975,9 +1106,9 @@ components:
           type: boolean
         conditionPenalties:
           items:
-            $ref: '#/components/schemas/PollutantProperties'
+            $ref: '#/components/schemas/PollutantProperty'
 
-    PollutantProperties:
+    PollutantProperty:
       type: object
       properties:
         pollutantId:
