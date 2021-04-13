@@ -816,12 +816,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /v1/pollutantProperties:
+  /v1/PollutantPenalties:
     get:
       summary: Lists all pollutant properties
-      operationId: getPollutantProperties
+      operationId: getPollutantPenalties
       tags:
-        - PollutantProperties
+        - PollutantPenalties
       responses:
         '200':
           description: found pollutants properties
@@ -830,7 +830,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PollutantProperty'
+                  $ref: '#/components/schemas/PollutantPenalty'
         default:
           description: unexpected error
           content:
@@ -838,24 +838,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     post:
-      summary: Creates a new pollutant
-      operationId: createPollutantProperty
+      summary: Creates a new pollutant penalty
+      operationId: createPollutantPenalty
       tags:
-        - PollutantProperties
+        - PollutantPenalties
       requestBody:
-        description: New pollutant property
+        description: New pollutant penalty
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PollutantProperty'
+              $ref: '#/components/schemas/PollutantPenalty'
       responses:
         '200':
-          description: Created pollutant property
+          description: Created pollutant penalty
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PollutantProperty'
+                $ref: '#/components/schemas/PollutantPenalty'
         default:
           description: unexpected error
           content:
@@ -863,27 +863,27 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /v1/pollutantProperties/{pollutantPropertyId}:
+  /v1/pollutantPenalties/{pollutantPenaltyId}:
     get:
       summary: Finds a pollutant property
-      operationId: findPollutantProperty
+      operationId: findPollutantPenalty
       tags:
-        - PollutantProperties
+        - PollutantPenalties
       parameters:
-        - name: pollutantPropertyId
+        - name: pollutantPenaltyId
           in: path
-          description: Pollutant property id
+          description: Pollutant peanlty id
           required: true
           schema:
             type: string
             format: uuid
       responses:
         '200':
-          description: A found pollutant property
+          description: A found pollutant penalty
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PollutantProperty'
+                $ref: '#/components/schemas/PollutantPenalty'
         default:
           description: unexpected error
           content:
@@ -891,12 +891,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     put:
-      summary: Updates pollutant property
-      operationId: updatePollutantProperty
+      summary: Updates pollutant penalty
+      operationId: updatePollutantPenalty
       tags:
-        - PollutantProperties
+        - PollutantPenalties
       parameters:
-        - name: pollutantPropertyId
+        - name: pollutantPenaltyId
           in: path
           description: Pollutant property id
           required: true
@@ -909,14 +909,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PollutantProperty'
+              $ref: '#/components/schemas/PollutantPenalty'
       responses:
         '200':
           description: Updated pollutant property
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PollutantProperty'
+                $ref: '#/components/schemas/PollutantPenalty'
         default:
           description: unexpected error
           content:
@@ -924,12 +924,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     delete:
-      summary: Deletes pollutant property
-      operationId: deletePollutantProperty
+      summary: Deletes pollutant penalty
+      operationId: deletePollutantPenalty
       tags:
-        - PollutantProperties
+        - PollutantPenalties
       parameters:
-        - name: pollutantPropertyId
+        - name: pollutantPenaltyId
           in: path
           description: Pollutant property id
           required: true
@@ -1044,7 +1044,7 @@ components:
           $ref: '#/components/schemas/HomeAddress'
         showMobileWelcomeScreen:
           type: boolean
-        pollutantProperties:
+        pollutantPenalties:
           type: array
           items:
             type: string
@@ -1105,12 +1105,20 @@ components:
         conditionApproved:
           type: boolean
         conditionPenalties:
+          type: array
           items:
-            $ref: '#/components/schemas/PollutantProperty'
+            type: string
+            format: uuid
 
-    PollutantProperty:
+    PollutantPenalty:
       type: object
+      required:
+        - penalty
+        - threshold
       properties:
+        id:
+          type: string
+          format: uuid
         pollutantId:
           type: string
           format: uuid
