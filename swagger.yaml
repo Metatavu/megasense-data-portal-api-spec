@@ -914,7 +914,7 @@ components:
           $ref: '#/components/schemas/HomeAddress'
         showMobileWelcomeScreen:
           type: boolean
-        pollutantPenalties:
+        pollutantProperties:
           type: array
           items:
             $ref: '#/components/schemas/PollutantProperties'
