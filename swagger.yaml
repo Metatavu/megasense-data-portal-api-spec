@@ -972,7 +972,7 @@ components:
         pollutionValues:
           type: array
           items:
-            $ref: '#/components/schemas/PollutantValue'
+            $ref: '#/components/schemas/PollutionEntry'
 
     Route:
       type: object
@@ -1032,7 +1032,7 @@ components:
         pollutionValues:
           type: array
           items:
-            $ref: '#/components/schemas/PollutantValue'
+            $ref: '#/components/schemas/PollutionEntry'
 
     UserSettings:
       type: object
@@ -1140,7 +1140,7 @@ components:
         pollutantName:
           type: string
 
-    PollutantValue:
+    PollutionEntry:
       type: object
       properties:
         pollutantId:
