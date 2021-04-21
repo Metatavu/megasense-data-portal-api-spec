@@ -818,13 +818,13 @@ paths:
 
   /v1/PollutantPenalties:
     get:
-      summary: Lists all pollutant properties
+      summary: Lists all pollutant penalties
       operationId: getPollutantPenalties
       tags:
         - PollutantPenalties
       responses:
         '200':
-          description: found pollutants properties
+          description: found pollutants penalties
           content:
             application/json:
               schema:
@@ -865,7 +865,7 @@ paths:
 
   /v1/pollutantPenalties/{pollutantPenaltyId}:
     get:
-      summary: Finds a pollutant property
+      summary: Finds a pollutant penalty
       operationId: findPollutantPenalty
       tags:
         - PollutantPenalties
@@ -898,13 +898,13 @@ paths:
       parameters:
         - name: pollutantPenaltyId
           in: path
-          description: Pollutant property id
+          description: Pollutant penalty id
           required: true
           schema:
             type: string
             format: uuid
       requestBody:
-        description: Updated pollutant property
+        description: Updated pollutant penalty
         required: true
         content:
           application/json:
@@ -912,7 +912,7 @@ paths:
               $ref: '#/components/schemas/PollutantPenalty'
       responses:
         '200':
-          description: Updated pollutant property
+          description: Updated pollutant penalty
           content:
             application/json:
               schema:
@@ -931,7 +931,7 @@ paths:
       parameters:
         - name: pollutantPenaltyId
           in: path
-          description: Pollutant property id
+          description: Pollutant penalty id
           required: true
           schema:
             type: string
