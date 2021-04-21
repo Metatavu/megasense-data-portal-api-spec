@@ -1133,11 +1133,14 @@ components:
       type: object
       required:
         - pollutantName
+        - displayName
       properties:
         id:
           type: string
           format: uuid
         pollutantName:
+          type: string
+        displayName:
           type: string
 
     PollutionEntry:
