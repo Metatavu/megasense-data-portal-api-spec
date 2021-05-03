@@ -271,12 +271,13 @@ paths:
       tags:
         - AirQuality
       parameters: 
-        - name: pollutant
+        - name: pollutantId
           in: query
-          description: pollutant type
+          description: pollutant id
           required: false
           schema:
             type: string
+            format: uuid
         - name: boundingBoxCorner1
           in: query
           description: Coordinates for the lower left of the bounding box
@@ -313,7 +314,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /v1/airQuality/{coordinates}/{pollutant}:
+  /v1/airQuality/{coordinates}/{pollutantId}:
     get:
       summary: Get air quality for specific coordinates
       operationId: getAirQualityForCoordinates
@@ -326,12 +327,13 @@ paths:
           required: true
           schema:
             type: string
-        - name: pollutant
+        - name: pollutantId
           in: path
           description: Pollutant to get
           required: true
           schema:
             type: string
+            format: uuid
       responses:
         '200':
           description: The air quality for a specific coordinate
@@ -684,6 +686,266 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /v1/pollutants:
+    get:
+      summary: Lists all pollutants
+      operationId: getPollutants
+      tags:
+        - Pollutants
+      responses:
+        '200':
+          description: found pollutants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pollutant'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Creates a new pollutant
+      operationId: createPollutant
+      tags:
+        - Pollutants
+      requestBody:
+        description: New pollutant
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pollutant'
+      responses:
+        '200':
+          description: Created pollutant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pollutant'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /v1/pollutants/{pollutantId}:
+    get:
+      summary: Finds a pollutant
+      operationId: findPollutant
+      tags:
+        - Pollutants
+      parameters:
+        - name: pollutantId
+          in: path
+          description: Pollutant id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: A found pollutant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pollutant'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Updates pollutant
+      operationId: updatePollutant
+      tags:
+        - Pollutants
+      parameters:
+        - name: pollutantId
+          in: path
+          description: Pollutant id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Updated pollutant
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pollutant'
+      responses:
+        '200':
+          description: Pollutant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pollutant'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes pollutant
+      operationId: deletePollutant
+      tags:
+        - Pollutants
+      parameters:
+        - name: pollutantId
+          in: path
+          description: Pollutant id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /v1/PollutantPenalties:
+    get:
+      summary: Lists all pollutant penalties
+      operationId: getPollutantPenalties
+      tags:
+        - PollutantPenalties
+      responses:
+        '200':
+          description: found pollutants penalties
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PollutantPenalty'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Creates a new pollutant penalty
+      operationId: createPollutantPenalty
+      tags:
+        - PollutantPenalties
+      requestBody:
+        description: New pollutant penalty
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PollutantPenalty'
+      responses:
+        '200':
+          description: Created pollutant penalty
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PollutantPenalty'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /v1/pollutantPenalties/{pollutantPenaltyId}:
+    get:
+      summary: Finds a pollutant penalty
+      operationId: findPollutantPenalty
+      tags:
+        - PollutantPenalties
+      parameters:
+        - name: pollutantPenaltyId
+          in: path
+          description: Pollutant peanlty id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: A found pollutant penalty
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PollutantPenalty'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Updates pollutant penalty
+      operationId: updatePollutantPenalty
+      tags:
+        - PollutantPenalties
+      parameters:
+        - name: pollutantPenaltyId
+          in: path
+          description: Pollutant penalty id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Updated pollutant penalty
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PollutantPenalty'
+      responses:
+        '200':
+          description: Updated pollutant penalty
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PollutantPenalty'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes pollutant penalty
+      operationId: deletePollutantPenalty
+      tags:
+        - PollutantPenalties
+      parameters:
+        - name: pollutantPenaltyId
+          in: path
+          description: Pollutant penalty id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
 components:
   securitySchemes:
     bearerAuth:
@@ -707,24 +969,11 @@ components:
         endedAt:
           type: string
           format: date-time
-        carbonMonoxide:
-          type: number
-          format: float
-        nitrogenMonoxide:
-          type: number
-          format: float
-        nitrogenDioxide:
-          type: number
-          format: float
-        ozone:
-          type: number
-          format: float
-        sulfurDioxide:
-          type: number
-          format: float
-        harmfulMicroparticles:
-          type: number
-          format: float
+        pollutionValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/PollutionEntry'
+
     Route:
       type: object
       required:
@@ -758,17 +1007,7 @@ components:
           format: int32
         message:
           type: string
-          
-    PollutantType:
-      type: string
-      enum:
-        - CARBON_MONOXIDE
-        - NITROGEN_MONOXIDE
-        - NITROGEN_DIOXIDE
-        - OZONE
-        - SULFUR_DIOXIDE
-        - MICRO_PARTICLES
-      
+
     Location:
       type: object
       required:
@@ -785,46 +1024,31 @@ components:
     AirQuality:
       type: object
       required:
-        - pollutionValue
-        - pollutant
+        - pollutionValues
         - location
       properties:
         location:
           $ref: '#/components/schemas/Location'
-        pollutants:
+        pollutionValues:
           type: array
           items:
-            $ref: '#/components/schemas/AirQualityPollutant'
-
-    AirQualityPollutant:
-      type: object
-      required:
-        - pollutionValue
-        - pollutant
-        - location
-      properties:
-        pollutionValue:
-          type: number
-          format: float
-        pollutant:
-          type: object
-          $ref: '#/components/schemas/PollutantType'
+            $ref: '#/components/schemas/PollutionEntry'
 
     UserSettings:
       type: object
       required:
         - showMobileWelcomeScreen
         - pollutantPenalties
-        - pollutantThresholds
       properties:
         homeAddress:
           $ref: '#/components/schemas/HomeAddress'
         showMobileWelcomeScreen:
           type: boolean
         pollutantPenalties:
-          $ref: '#/components/schemas/PollutantPenalties'
-        pollutantThresholds:
-          $ref: '#/components/schemas/PollutantThresholds'
+          type: array
+          items:
+            type: string
+            format: uuid
         medicalConditions:
           type: array
           items:
@@ -866,50 +1090,6 @@ components:
         longitude:
           type: number
           format: float
-    
-    PollutantPenalties:
-      type: object
-      properties:
-        carbonMonoxidePenalty:
-          type: number
-          format: float
-        nitrogenMonoxidePenalty:
-          type: number
-          format: float
-        nitrogenDioxidePenalty:
-          type: number
-          format: float
-        ozonePenalty:
-          type: number
-          format: float
-        sulfurDioxidePenalty:
-          type: number
-          format: float
-        harmfulMicroparticlesPenalty:
-          type: number
-          format: float
-          
-    PollutantThresholds:
-      type: object
-      properties:
-        carbonMonoxideThreshold:
-          type: number
-          format: float
-        nitrogenMonoxideThreshold:
-          type: number
-          format: float
-        nitrogenDioxideThreshold:
-          type: number
-          format: float
-        ozoneThreshold:
-          type: number
-          format: float
-        sulfurDioxideThreshold:
-          type: number
-          format: float
-        harmfulMicroparticlesThreshold:
-          type: number
-          format: float
 
     MedicalCondition:
       type: object
@@ -925,6 +1105,51 @@ components:
         conditionApproved:
           type: boolean
         conditionPenalties:
-          $ref: '#/components/schemas/PollutantPenalties'
-        conditionThresholds:
-          $ref: '#/components/schemas/PollutantThresholds'
+          type: array
+          items:
+            type: string
+            format: uuid
+
+    PollutantPenalty:
+      type: object
+      required:
+        - penalty
+        - threshold
+      properties:
+        id:
+          type: string
+          format: uuid
+        pollutantId:
+          type: string
+          format: uuid
+        penalty:
+          type: number
+          format: float
+        threshold:
+          type: number
+          format: float
+
+    Pollutant:
+      type: object
+      required:
+        - pollutantName
+        - displayName
+      properties:
+        id:
+          type: string
+          format: uuid
+        pollutantName:
+          type: string
+        displayName:
+          type: string
+
+    PollutionEntry:
+      type: object
+      properties:
+        pollutantId:
+          type: string
+          format: uuid
+        value:
+          type: number
+          format: float
+
