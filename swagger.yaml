@@ -347,45 +347,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-                
-  /v1/users/settings:
-    get:
-      summary: Gets user settings of the user who is logged in
-      operationId: getUserSettings
+  /v1/users:
+    post:
+      summary: Creates new user
+      operationId: createUser
       tags:
         - Users
+      requestBody:
+        description: New user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
       responses:
         '200':
           description: User settings
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserSettings'
+                $ref: '#/components/schemas/User'
         default:
           description: unexpected error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    post:
-      summary: Creates user settings for the user who is logged in
-      operationId: createUserSettings
+
+  /v1/users/{userId}:
+    get:
+      summary: Gets user settings of the user who is logged in
+      operationId: getUser
       tags:
         - Users
-      requestBody:
-        description: New user settings
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserSettings'
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          description: user id
+          schema:
+            type: string
+            format: uuid
       responses:
         '200':
-          description: User settings
+          description: User
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserSettings'
+                $ref: '#/components/schemas/User'
         default:
           description: unexpected error
           content:
@@ -393,24 +402,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     put:
-      summary: Updates user settings for the user who is logged in
-      operationId: updateUserSettings
+      summary: Updates user data for the user who is logged in
+      operationId: updateUser
       tags:
         - Users
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          description: user id
+          schema:
+            type: string
+            format: uuid
       requestBody:
         description: New user settings
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserSettings'  
+              $ref: '#/components/schemas/User'
       responses:
         '200':
           description: User settings
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserSettings'
+                $ref: '#/components/schemas/User'
         default:
           description: unexpected error
           content:
@@ -418,10 +435,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     delete:
-      summary: Deletes user settings of the user who is logged in
-      operationId: deleteUserSettings
+      summary: Deletes user who is logged in
+      operationId: deleteUser
       tags:
         - Users
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          description: user id
+          schema:
+            type: string
+            format: uuid
       responses:
         '204':
           description: Empty result indication of a successful removal
@@ -1034,27 +1059,6 @@ components:
           items:
             $ref: '#/components/schemas/PollutionEntry'
 
-    UserSettings:
-      type: object
-      required:
-        - showMobileWelcomeScreen
-        - pollutantPenalties
-      properties:
-        homeAddress:
-          $ref: '#/components/schemas/HomeAddress'
-        showMobileWelcomeScreen:
-          type: boolean
-        pollutantPenalties:
-          type: array
-          items:
-            type: string
-            format: uuid
-        medicalConditions:
-          type: array
-          items:
-            type: string
-            format: uuid
-    
     HomeAddress:
       type: object
       required:
@@ -1153,3 +1157,39 @@ components:
           type: number
           format: float
 
+    User:
+      type: object
+      description: User object
+      required:
+        - name
+        - email
+        - showMobileWelcomeScreen
+        - pollutantPenalties
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+          description: User name
+        email:
+          type: string
+          format: email
+          description: User email
+        password:
+          type: string
+        homeAddress:
+          $ref: '#/components/schemas/HomeAddress'
+        showMobileWelcomeScreen:
+          type: boolean
+        pollutantPenalties:
+          type: array
+          items:
+            type: string
+            format: uuid
+        medicalConditions:
+          type: array
+          items:
+            type: string
+            format: uuid
