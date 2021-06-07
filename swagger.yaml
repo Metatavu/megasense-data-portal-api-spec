@@ -266,7 +266,7 @@ paths:
                 $ref: '#/components/schemas/Error'
   /v1/airQuality:
     post:
-      summary: Get iar quality for array of coordinates
+      summary: Get air quality for array of coordinates
       operationId: getAirQualityForCoordinatesArray
       tags:
         - AirQuality
