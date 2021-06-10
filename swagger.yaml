@@ -293,9 +293,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AirQuality'
+                $ref: '#/components/schemas/RouteAirQuality'
         default:
           description: unexpected error
           content:
@@ -1222,3 +1220,19 @@ components:
           items:
             type: string
             format: uuid
+
+    RouteAirQuality:
+      type: object
+      description: Total air quality data for the array of coordinates
+      required:
+        - airQualityEntries
+        - pollutionDataTotals
+      properties:
+        airQualityEntries:
+          type: array
+          items:
+            $ref: '#/components/schemas/AirQuality'
+        pollutionDataTotals:
+          type: array
+          items:
+            $ref: '#/components/schemas/PollutionEntry'
