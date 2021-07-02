@@ -278,6 +278,13 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: routingTime
+          in: query
+          description: Time of requested air quality data
+          required: false
+          schema:
+            type: string
+            format: date-time
       requestBody:
         description: coordinates of route
         required: true
