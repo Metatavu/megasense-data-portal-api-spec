@@ -332,6 +332,13 @@ paths:
           required: false
           schema:
             type: string
+        - name: routingTime
+          in: query
+          description: Time of requested air quality data
+          required: false
+          schema:
+            type: string
+            format: date-time
       responses:
         '200':
           description: Air quality values
