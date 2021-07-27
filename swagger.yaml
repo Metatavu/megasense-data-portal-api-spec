@@ -1159,8 +1159,7 @@ components:
         conditionPenalties:
           type: array
           items:
-            type: string
-            format: uuid
+            type: PollutantPenalty
 
     PollutantPenalty:
       type: object
