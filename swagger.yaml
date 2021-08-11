@@ -1194,6 +1194,12 @@ components:
           type: string
         displayName:
           type: string
+        limit:
+          type: number
+          format: float
+        recommendation:
+          type: number
+          format: float
 
     PollutionEntry:
       type: object
