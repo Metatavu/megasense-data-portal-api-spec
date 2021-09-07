@@ -761,10 +761,17 @@ paths:
 
   /v1/pollutants:
     get:
-      summary: Lists all pollutants
+      summary: Lists pollutants
       operationId: getPollutants
       tags:
         - Pollutants
+      parameters:
+        - name: pollutantName
+          in: query
+          description: Pollutant name
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: found pollutants
