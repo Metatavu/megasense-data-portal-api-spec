@@ -896,7 +896,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /v1/PollutantPenalties:
+  /v1/pollutantPenalties:
     get:
       summary: Lists all pollutant penalties
       operationId: getPollutantPenalties
@@ -1012,6 +1012,144 @@ paths:
         - name: pollutantPenaltyId
           in: path
           description: Pollutant penalty id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+  /v1/routingModes:
+    get:
+      summary: Lists all default routing modes
+      operationId: getRoutingModes
+      tags:
+        - DefaultRoutingModes
+      parameters:
+        - name: routingModeName
+          in: query
+          description: Routing mode name
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: found routing modes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DefaultRoutingMode'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Creates a new default routing mode
+      operationId: createRoutingMode
+      tags:
+        - DefaultRoutingModes
+      requestBody:
+        description: New routing mode
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultRoutingMode'
+      responses:
+        '200':
+          description: Created routing mode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultRoutingMode'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /v1/routingModes/{routingModeId}:
+    get:
+      summary: Finds a routing mode
+      operationId: findRoutingMode
+      tags:
+        - DefaultRoutingModes
+      parameters:
+        - name: routingModeId
+          in: path
+          description: Routing mode id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: A found routing mode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultRoutingMode'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Updates routing mode
+      operationId: updateRoutingMode
+      tags:
+        - DefaultRoutingModes
+      parameters:
+        - name: routingModeId
+          in: path
+          description: Routing mode id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: Updated default routing mode
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DefaultRoutingMode'
+      responses:
+        '200':
+          description: Updated default routing mode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultRoutingMode'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes routing mode
+      operationId: deleteRoutingMode
+      tags:
+        - DefaultRoutingModes
+      parameters:
+        - name: routingModeId
+          in: path
+          description: Routing mode id
           required: true
           schema:
             type: string
@@ -1270,3 +1408,30 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PollutionEntry'
+
+    DefaultRoutingMode:
+      type: object
+      description: detault routing mode
+      required:
+        - name
+        - pollutionPenalties
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          $ref: '#/components/schemas/RoutingModeName'
+        pollutantPenalties:
+          type: array
+          items:
+            $ref: '#/components/schemas/PollutantPenalty'
+
+    RoutingModeName:
+      type: string
+      description: Routing mode names
+      enum:
+        - STRICT
+        - EFFICIENT
+        - RELAXED
+      title: Routing mode names
