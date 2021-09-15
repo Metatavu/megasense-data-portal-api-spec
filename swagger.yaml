@@ -1304,8 +1304,7 @@ components:
         conditionPenalties:
           type: array
           items:
-            type: string
-            format: uuid
+            $ref: '#/components/schemas/PollutantPenalty'
 
     PollutantPenalty:
       type: object
@@ -1385,8 +1384,7 @@ components:
         pollutantPenalties:
           type: array
           items:
-            type: string
-            format: uuid
+            $ref: '#/components/schemas/PollutantPenalty'
         medicalConditions:
           type: array
           items:
