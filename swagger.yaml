@@ -896,137 +896,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /v1/pollutantPenalties:
-    get:
-      summary: Lists all pollutant penalties
-      operationId: getPollutantPenalties
-      tags:
-        - PollutantPenalties
-      responses:
-        '200':
-          description: found pollutants penalties
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PollutantPenalty'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    post:
-      summary: Creates a new pollutant penalty
-      operationId: createPollutantPenalty
-      tags:
-        - PollutantPenalties
-      requestBody:
-        description: New pollutant penalty
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PollutantPenalty'
-      responses:
-        '200':
-          description: Created pollutant penalty
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PollutantPenalty'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-
-  /v1/pollutantPenalties/{pollutantPenaltyId}:
-    get:
-      summary: Finds a pollutant penalty
-      operationId: findPollutantPenalty
-      tags:
-        - PollutantPenalties
-      parameters:
-        - name: pollutantPenaltyId
-          in: path
-          description: Pollutant peanlty id
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: A found pollutant penalty
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PollutantPenalty'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    put:
-      summary: Updates pollutant penalty
-      operationId: updatePollutantPenalty
-      tags:
-        - PollutantPenalties
-      parameters:
-        - name: pollutantPenaltyId
-          in: path
-          description: Pollutant penalty id
-          required: true
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        description: Updated pollutant penalty
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PollutantPenalty'
-      responses:
-        '200':
-          description: Updated pollutant penalty
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PollutantPenalty'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    delete:
-      summary: Deletes pollutant penalty
-      operationId: deletePollutantPenalty
-      tags:
-        - PollutantPenalties
-      parameters:
-        - name: pollutantPenaltyId
-          in: path
-          description: Pollutant penalty id
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '204':
-          description: Empty result indication of a successful removal
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-
-
   /v1/routingModes:
     get:
       summary: Lists all default routing modes
@@ -1304,8 +1173,7 @@ components:
         conditionPenalties:
           type: array
           items:
-            type: string
-            format: uuid
+            $ref: '#/components/schemas/PollutantPenalty'
 
     PollutantPenalty:
       type: object
@@ -1385,8 +1253,7 @@ components:
         pollutantPenalties:
           type: array
           items:
-            type: string
-            format: uuid
+            $ref: '#/components/schemas/PollutantPenalty'
         medicalConditions:
           type: array
           items:
