@@ -120,6 +120,102 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+
+  /v1/publicRoutes:
+    post:
+      summary: Creates a public route
+      operationId: createPublicRoute
+      requestBody:
+        description: A public route to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Route'
+      tags:
+        - PublicRoutes
+      responses:
+        '200':
+          description: A created route
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      summary: Lists all public routes
+      operationId: listPublicRoutes
+      tags:
+        - PublicRoutes
+      responses:
+        '200':
+          description: An array of public routes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/publicRoutes/{routeId}:
+    get:
+      summary: Finds a route
+      operationId: findPublicRoute
+      tags:
+        - Routes
+      parameters:
+        - name: routeId
+          in: path
+          description: Route id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: A found public route
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes a public route
+      operationId: deletePublicRoute
+      tags:
+        - Routes
+      parameters:
+        - name: routeId
+          in: path
+          description: Route id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /v1/totalExposure:
     get:
       summary: Gets the total exposure of a user
@@ -1068,6 +1164,7 @@ components:
         - routePoints
         - locationFromName
         - locationToName
+        - routeType
       properties:
         id:
           type: string
@@ -1080,6 +1177,9 @@ components:
           type: string
         locationToName:
           type: string
+        routeType:
+          type: string
+          $ref: '#/components/schemas/RouteType'
         savedAt:
           type: string
           format: date-time
@@ -1293,6 +1393,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PollutantPenalty'
+
+    RouteType:
+      type: string
+      description: Route transportantion type
+      enum:
+        - WALKING
+        - BIKING
+        - ACCESSIBILITY
 
     RoutingModeName:
       type: string
