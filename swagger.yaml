@@ -56,6 +56,14 @@ paths:
       operationId: listRoutes
       tags:
         - Routes
+      parameters:
+        - name: routeType
+          in: query
+          description: Route movement type
+          required: false
+          schema:
+            type: string
+            $ref: '#/components/schemas/RouteType'
       responses:
         '200':
           description: An array of routes
@@ -122,36 +130,19 @@ paths:
                 $ref: '#/components/schemas/Error'
 
   /v1/publicRoutes:
-    post:
-      summary: Creates a public route
-      operationId: createPublicRoute
-      requestBody:
-        description: A public route to be created
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Route'
-      tags:
-        - PublicRoutes
-      responses:
-        '200':
-          description: A created route
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Route'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
     get:
       summary: Lists all public routes
       operationId: listPublicRoutes
       tags:
-        - PublicRoutes
+        - Routes
+      parameters:
+        - name: routeType
+          in: query
+          description: Route movement type
+          required: false
+          schema:
+            type: string
+            $ref: '#/components/schemas/RouteType'
       responses:
         '200':
           description: An array of public routes
@@ -188,28 +179,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Route'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    delete:
-      summary: Deletes a public route
-      operationId: deletePublicRoute
-      tags:
-        - Routes
-      parameters:
-        - name: routeId
-          in: path
-          description: Route id
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '204':
-          description: Empty result indication of a successful removal
         default:
           description: unexpected error
           content:
@@ -1164,6 +1133,7 @@ components:
         - routePoints
         - locationFromName
         - locationToName
+        - isPublic
         - routeType
       properties:
         id:
@@ -1180,6 +1150,8 @@ components:
         routeType:
           type: string
           $ref: '#/components/schemas/RouteType'
+        isPublic:
+          type: boolean
         savedAt:
           type: string
           format: date-time
