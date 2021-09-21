@@ -64,6 +64,13 @@ paths:
           schema:
             type: string
             $ref: '#/components/schemas/RouteType'
+        - name: accessRights
+          in: query
+          description: access rights of the route
+          required: false
+          schema:
+            type: string
+            enum: [PUBLIC_ONLY, PRIVATE_ONLY]
       responses:
         '200':
           description: An array of routes
@@ -129,62 +136,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /v1/publicRoutes:
-    get:
-      summary: Lists all public routes
-      operationId: listPublicRoutes
-      tags:
-        - Routes
-      parameters:
-        - name: routeType
-          in: query
-          description: Route movement type
-          required: false
-          schema:
-            type: string
-            $ref: '#/components/schemas/RouteType'
-      responses:
-        '200':
-          description: An array of public routes
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Route'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /v1/publicRoutes/{routeId}:
-    get:
-      summary: Finds a route
-      operationId: findPublicRoute
-      tags:
-        - Routes
-      parameters:
-        - name: routeId
-          in: path
-          description: Route id
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: A found public route
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Route'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
   /v1/totalExposure:
     get:
       summary: Gets the total exposure of a user
