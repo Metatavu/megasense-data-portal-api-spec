@@ -1282,6 +1282,9 @@ components:
           items:
             type: string
             format: uuid
+        transportPreference:
+          type: string
+          $ref: '#/components/schemas/RouteType'
 
     RouteAirQuality:
       type: object
