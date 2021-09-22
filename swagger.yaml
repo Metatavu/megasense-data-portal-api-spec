@@ -56,6 +56,21 @@ paths:
       operationId: listRoutes
       tags:
         - Routes
+      parameters:
+        - name: routeType
+          in: query
+          description: Route movement type
+          required: false
+          schema:
+            type: string
+            $ref: '#/components/schemas/RouteType'
+        - name: accessRights
+          in: query
+          description: access rights of the route
+          required: false
+          schema:
+            type: string
+            enum: [PUBLIC_ONLY, PRIVATE_ONLY]
       responses:
         '200':
           description: An array of routes
@@ -120,6 +135,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+
   /v1/totalExposure:
     get:
       summary: Gets the total exposure of a user
@@ -1068,6 +1084,8 @@ components:
         - routePoints
         - locationFromName
         - locationToName
+        - isPublic
+        - routeType
       properties:
         id:
           type: string
@@ -1080,6 +1098,11 @@ components:
           type: string
         locationToName:
           type: string
+        routeType:
+          type: string
+          $ref: '#/components/schemas/RouteType'
+        isPublic:
+          type: boolean
         savedAt:
           type: string
           format: date-time
@@ -1293,6 +1316,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PollutantPenalty'
+
+    RouteType:
+      type: string
+      description: Route transportantion type
+      enum:
+        - WALKING
+        - BIKING
+        - ACCESSIBILITY
 
     RoutingModeName:
       type: string
