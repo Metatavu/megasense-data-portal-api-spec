@@ -1314,7 +1314,6 @@ components:
           format: uuid
         name:
           type: string
-          $ref: '#/components/schemas/RoutingModeName'
         pollutantPenalties:
           type: array
           items:
@@ -1327,12 +1326,3 @@ components:
         - WALKING
         - BIKING
         - ACCESSIBILITY
-
-    RoutingModeName:
-      type: string
-      description: Routing mode names
-      enum:
-        - STRICT
-        - EFFICIENT
-        - RELAXED
-      title: Routing mode names
