@@ -1308,12 +1308,15 @@ components:
       required:
         - name
         - pollutionPenalties
+        - icon
       properties:
         id:
           type: string
           format: uuid
         name:
           type: string
+        icon:
+          $ref: '#/components/schemas/RoutingModeIcon'
         pollutantPenalties:
           type: array
           items:
@@ -1326,3 +1329,14 @@ components:
         - WALKING
         - BIKING
         - ACCESSIBILITY
+
+    RoutingModeIcon:
+      type: string
+      description: Icon type of a routing mode
+      enum:
+        - heart
+        - thumbUp
+        - insight
+        - timer
+        - timeLine
+        - eco
