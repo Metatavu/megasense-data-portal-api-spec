@@ -1220,16 +1220,13 @@ components:
     Pollutant:
       type: object
       required:
-        - pollutantName
-        - displayName
+        - name
         - unit
       properties:
         id:
           type: string
           format: uuid
-        pollutantName:
-          type: string
-        displayName:
+        name:
           type: string
         unit:
           type: string
@@ -1239,6 +1236,25 @@ components:
         recommendation:
           type: number
           format: float
+        settingsVariableNames:
+          $ref: '#/components/schemas/PollutantVariables'
+
+    PollutantVariables:
+      type: object
+      required:
+        - pollutantName
+        - pollutantVariable
+      properties:
+        pollutantName:
+          type: string
+          description: Pollutant reference name for request parameters
+        pollutantVariable:
+          type: string
+          description: Pollutant variable name for NetCDF file indexing
+        limitQueryName:
+          type: string
+        thresholdQueryName:
+          type: string
 
     PollutionEntry:
       type: object
