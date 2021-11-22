@@ -1249,7 +1249,7 @@ components:
           type: number
           format: float
         requestParameters:
-          $ref: '#/components/schemas/PollutantVariables'
+          $ref: '#/components/schemas/PollutantRequestParameter'
 
     PollutantRequestParameter:
       type: object
