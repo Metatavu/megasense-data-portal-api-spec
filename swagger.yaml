@@ -1254,7 +1254,7 @@ components:
     PollutantRequestParameter:
       type: object
       properties:
-        limitQueryName:
+        penaltyQueryName:
           type: string
           readOnly: true
         thresholdQueryName:
