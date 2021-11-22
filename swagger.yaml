@@ -1224,6 +1224,7 @@ components:
         - displayName
         - unit
         - variableName
+        - requestParameters
       properties:
         id:
           type: string
@@ -1250,6 +1251,9 @@ components:
 
     PollutantRequestParameter:
       type: object
+      required:
+        - penaltyRequestParameter
+        - thresholdRequestParameter
       properties:
         penaltyRequestParameter:
           type: string
