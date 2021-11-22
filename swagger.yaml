@@ -1248,7 +1248,7 @@ components:
         recommendation:
           type: number
           format: float
-        settingsVariableNames:
+        requestParameters:
           $ref: '#/components/schemas/PollutantVariables'
 
     PollutantRequestParameter:
