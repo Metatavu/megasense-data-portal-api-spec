@@ -1220,15 +1220,26 @@ components:
     Pollutant:
       type: object
       required:
-        - name
+        - displayName
         - unit
+        - pollutantName
+        - pollutantVariable
       properties:
         id:
           type: string
           format: uuid
-        name:
+        displayName:
           type: string
           description: Displayed name for a pollutant
+          readOnly: true
+        pollutantName:
+          type: string
+          description: Pollutant reference name for request parameters
+          readOnly: true
+        pollutantVariable:
+          type: string
+          description: Pollutant variable name for NetCDF file indexing
+          readOnly: true
         unit:
           type: string
         limit:
@@ -1240,20 +1251,9 @@ components:
         settingsVariableNames:
           $ref: '#/components/schemas/PollutantVariables'
 
-    PollutantVariables:
+    PollutantRequestParameter:
       type: object
-      required:
-        - pollutantName
-        - pollutantVariable
       properties:
-        pollutantName:
-          type: string
-          description: Pollutant reference name for request parameters
-          readOnly: true
-        pollutantVariable:
-          type: string
-          description: Pollutant variable name for NetCDF file indexing
-          readOnly: true
         limitQueryName:
           type: string
           readOnly: true
