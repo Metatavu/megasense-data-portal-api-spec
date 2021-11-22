@@ -1234,11 +1234,11 @@ components:
         displayName:
           type: string
           description: Displayed name for a pollutant
+        unit:
+          type: string
         variableName:
           type: string
           description: Pollutant variable name for NetCDF file indexing
-        unit:
-          type: string
         limit:
           type: number
           format: float
