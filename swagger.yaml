@@ -1222,7 +1222,7 @@ components:
       required:
         - displayName
         - unit
-        - pollutantName
+        - name
         - pollutantVariable
       properties:
         id:
@@ -1232,7 +1232,7 @@ components:
           type: string
           description: Displayed name for a pollutant
           readOnly: true
-        pollutantName:
+        name:
           type: string
           description: Pollutant reference name for request parameters
           readOnly: true
