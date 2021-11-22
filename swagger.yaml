@@ -1228,15 +1228,15 @@ components:
         id:
           type: string
           format: uuid
+        pollutantName:
+          type: string
+          description: Pollutant reference name for request parameters
+          readOnly: true
         displayName:
           type: string
           description: Displayed name for a pollutant
           readOnly: true
-        name:
-          type: string
-          description: Pollutant reference name for request parameters
-          readOnly: true
-        pollutantVariable:
+        variableName:
           type: string
           description: Pollutant variable name for NetCDF file indexing
           readOnly: true
@@ -1255,10 +1255,10 @@ components:
     PollutantRequestParameter:
       type: object
       properties:
-        penaltyQueryName:
+        penaltyRequestParameter:
           type: string
           readOnly: true
-        thresholdQueryName:
+        thresholdRequestParameter:
           type: string
           readOnly: true
 
