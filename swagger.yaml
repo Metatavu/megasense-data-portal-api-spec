@@ -1223,7 +1223,7 @@ components:
         - pollutantName
         - displayName
         - unit
-        - pollutantVariable
+        - variableName
       properties:
         id:
           type: string
