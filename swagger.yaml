@@ -1242,6 +1242,7 @@ components:
           readOnly: true
         unit:
           type: string
+          readOnly: true
         limit:
           type: number
           format: float
