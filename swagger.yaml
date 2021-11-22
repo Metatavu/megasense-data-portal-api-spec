@@ -1220,9 +1220,9 @@ components:
     Pollutant:
       type: object
       required:
+        - pollutantName
         - displayName
         - unit
-        - name
         - pollutantVariable
       properties:
         id:
@@ -1231,18 +1231,14 @@ components:
         pollutantName:
           type: string
           description: Pollutant reference name for request parameters
-          readOnly: true
         displayName:
           type: string
           description: Displayed name for a pollutant
-          readOnly: true
         variableName:
           type: string
           description: Pollutant variable name for NetCDF file indexing
-          readOnly: true
         unit:
           type: string
-          readOnly: true
         limit:
           type: number
           format: float
@@ -1257,10 +1253,8 @@ components:
       properties:
         penaltyRequestParameter:
           type: string
-          readOnly: true
         thresholdRequestParameter:
           type: string
-          readOnly: true
 
     PollutionEntry:
       type: object
