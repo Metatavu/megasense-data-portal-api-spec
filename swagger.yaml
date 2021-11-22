@@ -1228,6 +1228,7 @@ components:
           format: uuid
         name:
           type: string
+          description: Displayed name for a pollutant
         unit:
           type: string
         limit:
@@ -1248,13 +1249,17 @@ components:
         pollutantName:
           type: string
           description: Pollutant reference name for request parameters
+          readOnly: true
         pollutantVariable:
           type: string
           description: Pollutant variable name for NetCDF file indexing
+          readOnly: true
         limitQueryName:
           type: string
+          readOnly: true
         thresholdQueryName:
           type: string
+          readOnly: true
 
     PollutionEntry:
       type: object
