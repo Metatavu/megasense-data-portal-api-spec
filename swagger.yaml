@@ -803,31 +803,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    post:
-      summary: Creates a new pollutant
-      operationId: createPollutant
-      tags:
-        - Pollutants
-      requestBody:
-        description: New pollutant
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Pollutant'
-      responses:
-        '200':
-          description: Created pollutant
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pollutant'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
 
   /v1/pollutants/{pollutantId}:
     get:
