@@ -803,31 +803,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    post:
-      summary: Creates a new pollutant
-      operationId: createPollutant
-      tags:
-        - Pollutants
-      requestBody:
-        description: New pollutant
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Pollutant'
-      responses:
-        '200':
-          description: Created pollutant
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pollutant'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
 
   /v1/pollutants/{pollutantId}:
     get:
@@ -1223,22 +1198,42 @@ components:
         - pollutantName
         - displayName
         - unit
+        - variableName
+        - requestParameters
       properties:
         id:
           type: string
           format: uuid
         pollutantName:
           type: string
+          description: Pollutant reference name for request parameters
         displayName:
           type: string
+          description: Displayed name for a pollutant
         unit:
           type: string
+        variableName:
+          type: string
+          description: Pollutant variable name for NetCDF file indexing
         limit:
           type: number
           format: float
         recommendation:
           type: number
           format: float
+        requestParameters:
+          $ref: '#/components/schemas/PollutantRequestParameter'
+
+    PollutantRequestParameter:
+      type: object
+      required:
+        - penaltyRequestParameter
+        - thresholdRequestParameter
+      properties:
+        penaltyRequestParameter:
+          type: string
+        thresholdRequestParameter:
+          type: string
 
     PollutionEntry:
       type: object
