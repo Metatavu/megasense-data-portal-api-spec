@@ -1154,6 +1154,8 @@ components:
         longitude:
           type: number
           format: float
+        address:
+          $ref: '#/components/schemas/HomeAddress'
 
     MedicalCondition:
       type: object
