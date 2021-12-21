@@ -1119,7 +1119,7 @@ components:
           items:
             $ref: '#/components/schemas/PollutionEntry'
 
-    HomeAddress:
+    Address:
       type: object
       required:
         - streetAddress
@@ -1154,6 +1154,8 @@ components:
         longitude:
           type: number
           format: float
+        address:
+          $ref: '#/components/schemas/Address'
 
     MedicalCondition:
       type: object
@@ -1268,7 +1270,7 @@ components:
         password:
           type: string
         homeAddress:
-          $ref: '#/components/schemas/HomeAddress'
+          $ref: '#/components/schemas/Address'
         showMobileWelcomeScreen:
           type: boolean
         pollutantPenalties:
