@@ -1352,7 +1352,7 @@ components:
         distance:
           type: number
           format: float
-          decsription: Distance
+          description: Distance
         lat:
           type: number
           format: float
