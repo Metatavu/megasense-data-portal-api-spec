@@ -1078,6 +1078,10 @@ components:
           $ref: '#/components/schemas/RouteType'
         isPublic:
           type: boolean
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteStep'
         savedAt:
           type: string
           format: date-time
@@ -1340,3 +1344,37 @@ components:
         - timer
         - timeLine
         - eco
+
+    RouteStep:
+      type: object
+      description: Route step data that is built by Open Trip Planner
+      properties:
+        distance:
+          type: number
+          format: float
+          description: Distance
+        lat:
+          type: number
+          format: float
+          description: Latitude
+        lon:
+          type: number
+          format: float
+          description: Longitude
+        streetName:
+          type: string
+          description: Street name
+        relativeDirection:
+          type: string
+          description: Relative direction
+        absoluteDirection:
+          type: string
+          description: Absolute direction
+        stayOn:
+          type: boolean
+        area:
+          type: boolean
+        bogusName:
+          type: boolean
+        elevation:
+          type: string
