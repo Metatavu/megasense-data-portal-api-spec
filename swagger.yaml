@@ -25,6 +25,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /v1/stripeproducts:
+    get:
+      summary: Lists Stripe products
+      operationId: listStripeProducts
+      tags:
+        - StripeProducts
+      responses:
+        '200':
+          description: List of Stripe products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StripeProduct'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/stripeproducts/{stripeProductId}/plans:
+    get:
+      summary: Lists Stripe product plans
+      operationId: listStripeProductPlans
+      tags:
+        - StripeProducts
+      parameters:
+        - name: stripeProductId
+          in: path
+          description: The id of the organization
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of Stripe product plans
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StripeProductPlan'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /v1/routes:
     post:
       summary: Creates a route
@@ -511,6 +560,170 @@ paths:
           schema:
             type: string
             format: uuid
+      responses:
+        '204':
+          description: Empty result indication of a successful removal
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /v1/users/{userId}/subscriptions:
+    get:
+      summary: Lists user subscriptions
+      operationId: listUserSubscriptions
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          description: user id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: User subscriptions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscription'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create user subscription
+      operationId: createUserSubscription
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          description: user id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        description: The subscription to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        '200':
+          description: Created user subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /v1/users/{userId}/subscriptions/{subscriptionId}:
+    get:
+      summary: Find user subscription
+      operationId: findUserSubscription
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          description: user id
+          schema:
+            type: string
+            format: uuid
+        - name: subscriptionId
+          required: true
+          in: path
+          description: subscription id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A user subscription found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update user subscription
+      operationId: updateUserSubscription
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          description: user id
+          schema:
+            type: string
+            format: uuid
+        - name: subscriptionId
+          required: true
+          in: path
+          description: subscription id
+          schema:
+            type: string
+      requestBody:
+        description: Updated subsctiption details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+      responses:
+        '200':
+          description: Updated user subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete user subscription
+      operationId: deleteUserSubsctiption
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          required: true
+          in: path
+          description: user id
+          schema:
+            type: string
+            format: uuid
+        - name: subscriptionId
+          required: true
+          in: path
+          description: subscription id
+          schema:
+            type: string
       responses:
         '204':
           description: Empty result indication of a successful removal
@@ -1289,6 +1502,12 @@ components:
         transportPreference:
           type: string
           $ref: '#/components/schemas/RouteType'
+        subscriptionStatus:
+          type: string
+          enum:
+            - ACTIVE
+            - NOT_PAID
+            - ENDED
 
     RouteAirQuality:
       type: object
@@ -1378,3 +1597,40 @@ components:
           type: boolean
         elevation:
           type: string
+    
+    StripeProductPlan:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: string
+        interval:
+          type: string
+        intervalCount:
+          type: integer
+          format: int64
+    
+    StripeProduct:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+        planId:
+          type: string
+        cancelAtPeriodEnd:
+          type: boolean
+        currentPeriodStart:
+          type: integer
+          format: int64
+        currentPeriodEnd:
+          type: integer
+          format: int64
