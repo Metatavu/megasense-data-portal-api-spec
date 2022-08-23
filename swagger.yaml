@@ -25,7 +25,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /v1/stripeproducts:
+  /v1/stripeProducts:
     get:
       summary: Lists Stripe products
       operationId: listStripeProducts
@@ -46,7 +46,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /v1/stripeproducts/{stripeProductId}/plans:
+  /v1/stripeProducts/{stripeProductId}/plans:
     get:
       summary: Lists Stripe product plans
       operationId: listStripeProductPlans
