@@ -570,6 +570,175 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  "/v1/users/{userId}/cards":
+    get:
+      operationId: listUserCards
+      summary: Lists user cards
+      description: Lists user cards
+      tags:
+        - UserCards
+      parameters:
+        - name: userId
+          in: path
+          description: The id of the user
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json;charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Card"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createUserCard
+      summary: Create user card
+      description: Creates user card
+      tags:
+        - UserCards
+      parameters:
+        - name: userId
+          in: path
+          description: The user to be updated
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: "#/components/schemas/Card"
+        description: The reportImage to be created
+        required: true
+      responses:
+        "200":
+          description: Created reportImage
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Card"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  "/v1/users/{userId}/cards/{cardId}":
+    get:
+      operationId: findUserCard
+      summary: Finds user card
+      description: Finds a user card
+      tags:
+        - UserCards
+      parameters:
+        - name: userId
+          in: path
+          description: The id of the user
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: cardId
+          in: path
+          description: The id of the card
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Card"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updateUserCard
+      summary: Update user card
+      description: Updates a user card
+      tags:
+        - UserCards
+      parameters:
+        - name: userId
+          in: path
+          description: The user to be updated
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: cardId
+          in: path
+          description: The id of the card
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: "#/components/schemas/Card"
+        description: Payload
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Card"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteUserCard
+      summary: Delete user card
+      description: Deletes a user card
+      tags:
+        - UserCards
+      parameters:
+        - name: userId
+          in: path
+          description: The id of the user
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: cardId
+          in: path
+          description: The id of the card
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Success
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
   /v1/users/{userId}/subscriptions:
     get:
       summary: Lists user subscriptions
@@ -1504,10 +1673,7 @@ components:
           $ref: '#/components/schemas/RouteType'
         subscriptionStatus:
           type: string
-          enum:
-            - ACTIVE
-            - NOT_PAID
-            - ENDED
+          $ref: '#/components/schemas/StripeSubscriptionStatus'
 
     RouteAirQuality:
       type: object
@@ -1634,3 +1800,22 @@ components:
         currentPeriodEnd:
           type: integer
           format: int64
+
+    Card:
+      type: object
+      properties:
+        id:
+          type: string
+        brand:
+          type: string
+        last4:
+          type: string
+        sourceToken:
+          type: string
+
+    StripeSubscriptionStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - NOT_PAID
+        - ENDED
