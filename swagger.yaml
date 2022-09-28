@@ -46,28 +46,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /v1/stripeProducts/{stripeProductId}/plans:
+  /v1/stripeProducts/{stripeProductId}/prices:
     get:
-      summary: Lists Stripe product plans
-      operationId: listStripeProductPlans
+      summary: Lists Stripe product prices
+      operationId: listStripeProductPrices
       tags:
         - StripeProducts
       parameters:
         - name: stripeProductId
           in: path
-          description: The id of the organization
+          description: The id of the product
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: List of Stripe product plans
+          description: List of Stripe product prices
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StripeProductPlan'
+                  $ref: '#/components/schemas/StripeProductPrice'
         default:
           description: unexpected error
           content:
@@ -1764,12 +1764,12 @@ components:
         elevation:
           type: string
     
-    StripeProductPlan:
+    StripeProductPrice:
       type: object
       properties:
         id:
           type: string
-        amount:
+        unitAmount:
           type: string
         interval:
           type: string
@@ -1790,7 +1790,7 @@ components:
       properties:
         id:
           type: string
-        planId:
+        priceId:
           type: string
         cancelAtPeriodEnd:
           type: boolean
