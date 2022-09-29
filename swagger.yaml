@@ -572,7 +572,7 @@ paths:
 
   "/v1/users/{userId}/cards":
     get:
-      operationId: listUserCards
+      operationId: listUserStripeCards
       summary: Lists user cards
       description: Lists user cards
       tags:
@@ -593,7 +593,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Card"
+                  $ref: "#/components/schemas/StripeCard"
         default:
           description: unexpected error
           content:
@@ -601,7 +601,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     post:
-      operationId: createUserCard
+      operationId: createUserStripeCard
       summary: Create user card
       description: Creates user card
       tags:
@@ -618,7 +618,7 @@ paths:
         content:
           application/json;charset=utf-8:
             schema:
-              $ref: "#/components/schemas/Card"
+              $ref: "#/components/schemas/StripeCard"
         description: The reportImage to be created
         required: true
       responses:
@@ -627,7 +627,7 @@ paths:
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/Card"
+                $ref: "#/components/schemas/StripeCard"
         default:
           description: unexpected error
           content:
@@ -637,7 +637,7 @@ paths:
 
   "/v1/users/{userId}/cards/{cardId}":
     get:
-      operationId: findUserCard
+      operationId: findUserStripeCard
       summary: Finds user card
       description: Finds a user card
       tags:
@@ -662,7 +662,7 @@ paths:
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/Card"
+                $ref: "#/components/schemas/StripeCard"
         default:
           description: unexpected error
           content:
@@ -670,7 +670,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     put:
-      operationId: updateUserCard
+      operationId: updateUserStripeCard
       summary: Update user card
       description: Updates a user card
       tags:
@@ -693,7 +693,7 @@ paths:
         content:
           application/json;charset=utf-8:
             schema:
-              $ref: "#/components/schemas/Card"
+              $ref: "#/components/schemas/StripeCard"
         description: Payload
         required: true
       responses:
@@ -702,7 +702,7 @@ paths:
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/Card"
+                $ref: "#/components/schemas/StripeCard"
         default:
           description: unexpected error
           content:
@@ -710,7 +710,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     delete:
-      operationId: deleteUserCard
+      operationId: deleteUserStripeCard
       summary: Delete user card
       description: Deletes a user card
       tags:
@@ -742,7 +742,7 @@ paths:
   /v1/users/{userId}/subscriptions:
     get:
       summary: Lists user subscriptions
-      operationId: listUserSubscriptions
+      operationId: listUserStripeSubscriptions
       tags:
         - Users
       parameters:
@@ -761,7 +761,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Subscription'
+                  $ref: '#/components/schemas/StripeSubscription'
         default:
           description: unexpected error
           content:
@@ -770,7 +770,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       summary: Create user subscription
-      operationId: createUserSubscription
+      operationId: createUserStripeSubscription
       tags:
         - Users
       parameters:
@@ -787,14 +787,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Subscription'
+              $ref: '#/components/schemas/StripeSubscription'
       responses:
         '200':
           description: Created user subscription
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Subscription'
+                $ref: '#/components/schemas/StripeSubscription'
         default:
           description: unexpected error
           content:
@@ -805,7 +805,7 @@ paths:
   /v1/users/{userId}/subscriptions/{subscriptionId}:
     get:
       summary: Find user subscription
-      operationId: findUserSubscription
+      operationId: findUserStripeSubscription
       tags:
         - Users
       parameters:
@@ -828,7 +828,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Subscription'
+                $ref: '#/components/schemas/StripeSubscription'
         default:
           description: unexpected error
           content:
@@ -837,7 +837,7 @@ paths:
                 $ref: '#/components/schemas/Error'
     put:
       summary: Update user subscription
-      operationId: updateUserSubscription
+      operationId: updateUserStripeSubscription
       tags:
         - Users
       parameters:
@@ -860,14 +860,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Subscription'
+              $ref: '#/components/schemas/StripeSubscription'
       responses:
         '200':
           description: Updated user subscription
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Subscription'
+                $ref: '#/components/schemas/StripeSubscription'
         default:
           description: unexpected error
           content:
@@ -1779,19 +1779,24 @@ components:
     
     StripeProduct:
       type: object
+      description: Object describing stripe product
       properties:
         id:
           type: string
+          description: Stripe product id
         name:
           type: string
     
-    Subscription:
+    StripeSubscription:
       type: object
+      description: Object describing stripe subscription
       properties:
         id:
           type: string
+          description: Stripe subscription id
         priceId:
           type: string
+          description: Stripe price id
         cancelAtPeriodEnd:
           type: boolean
         currentPeriodStart:
@@ -1801,7 +1806,7 @@ components:
           type: integer
           format: int64
 
-    Card:
+    StripeCard:
       type: object
       properties:
         id:
