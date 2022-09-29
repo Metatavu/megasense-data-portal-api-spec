@@ -141,7 +141,7 @@ paths:
       operationId: findRoute
       tags:
         - Routes
-      parameters: 
+      parameters:
         - name: routeId
           in: path
           description: Route id
@@ -167,7 +167,7 @@ paths:
       operationId: deleteRoute
       tags:
         - Routes
-      parameters: 
+      parameters:
         - name: routeId
           in: path
           description: Route id
@@ -191,7 +191,7 @@ paths:
       operationId: totalExposure
       tags:
         - TotalExposure
-      parameters: 
+      parameters:
         - name: exposedBefore
           in: query
           description: Exposed before time
@@ -250,7 +250,7 @@ paths:
       operationId: listExposureInstances
       tags:
         - ExposureInstances
-      parameters: 
+      parameters:
         - name: createdBefore
           in: query
           description: Created before time
@@ -286,7 +286,7 @@ paths:
       operationId: findExposureInstance
       tags:
         - ExposureInstances
-      parameters: 
+      parameters:
         - name: exposureInstanceId
           in: path
           description: Exposure instance id
@@ -312,7 +312,7 @@ paths:
       operationId: deleteExposureInstance
       tags:
         - ExposureInstances
-      parameters: 
+      parameters:
         - name: exposureInstanceId
           in: path
           description: Exposure instance id
@@ -377,7 +377,7 @@ paths:
       operationId: getAirQuality
       tags:
         - AirQuality
-      parameters: 
+      parameters:
         - name: pollutantId
           in: query
           description: pollutant id
@@ -875,8 +875,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     delete:
-      summary: Delete user subscription
-      operationId: deleteUserSubsctiption
+      summary: Cancel user subscription
+      operationId: cancelUserStripeSubscription
       tags:
         - Users
       parameters:
@@ -894,8 +894,12 @@ paths:
           schema:
             type: string
       responses:
-        '204':
-          description: Empty result indication of a successful removal
+        '200':
+          description: Cancelled user subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StripeSubscription'
         default:
           description: unexpected error
           content:
@@ -923,7 +927,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-                
+
   /v1/favourites:
     get:
       summary: Gets user favourite locations
@@ -976,7 +980,7 @@ paths:
       operationId: updateUserFavouriteLocation
       tags:
         - FavouriteLocations
-      parameters: 
+      parameters:
         - name: favouriteId
           in: path
           description: Favourite id
@@ -990,7 +994,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FavouriteLocation'  
+              $ref: '#/components/schemas/FavouriteLocation'
       responses:
         '200':
           description: An updated favourite location
@@ -1009,7 +1013,7 @@ paths:
       operationId: deleteUserFavouriteLocation
       tags:
         - FavouriteLocations
-      parameters: 
+      parameters:
         - name: favouriteId
           in: path
           description: Favourite id
@@ -1521,7 +1525,7 @@ components:
           type: string
         country:
           type: string
-          
+
     FavouriteLocation:
       type: object
       required:
