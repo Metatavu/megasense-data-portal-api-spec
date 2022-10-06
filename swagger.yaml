@@ -744,7 +744,7 @@ paths:
       summary: Lists user subscriptions
       operationId: listUserStripeSubscriptions
       tags:
-        - Users
+        - Subscription
       parameters:
         - name: userId
           required: true
@@ -772,7 +772,7 @@ paths:
       summary: Create user subscription
       operationId: createUserStripeSubscription
       tags:
-        - Users
+        - Subscription
       parameters:
         - name: userId
           required: true
@@ -807,7 +807,7 @@ paths:
       summary: Find user subscription
       operationId: findUserStripeSubscription
       tags:
-        - Users
+        - Subscription
       parameters:
         - name: userId
           required: true
@@ -839,7 +839,7 @@ paths:
       summary: Update user subscription
       operationId: updateUserStripeSubscription
       tags:
-        - Users
+        - Subscription
       parameters:
         - name: userId
           required: true
@@ -878,7 +878,7 @@ paths:
       summary: Cancel user subscription
       operationId: cancelUserStripeSubscription
       tags:
-        - Users
+        - Subscription
       parameters:
         - name: userId
           required: true
