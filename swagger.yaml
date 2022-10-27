@@ -1821,8 +1821,6 @@ components:
           type: string
         last4:
           type: string
-        sourceToken:
-          type: string
 
     StripeSubscriptionStatus:
       type: string
