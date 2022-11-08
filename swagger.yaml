@@ -12,7 +12,7 @@ paths:
       tags:
         - system
       responses:
-        '200':
+        "200":
           description: System ping response
           content:
             text/plain:
@@ -24,7 +24,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /v1/stripeProducts:
     get:
       summary: Lists Stripe products
@@ -32,20 +32,20 @@ paths:
       tags:
         - StripeProducts
       responses:
-        '200':
+        "200":
           description: List of Stripe products
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StripeProduct'
+                  $ref: "#/components/schemas/StripeProduct"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /v1/stripeProducts/{stripeProductId}/prices:
     get:
       summary: Lists Stripe product prices
@@ -60,20 +60,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: List of Stripe product prices
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StripeProductPrice'
+                  $ref: "#/components/schemas/StripeProductPrice"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /v1/routes:
     post:
       summary: Creates a route
@@ -84,22 +84,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Route'
+              $ref: "#/components/schemas/Route"
       tags:
         - Routes
       responses:
-        '200':
+        "200":
           description: A created route
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Route'
+                $ref: "#/components/schemas/Route"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     get:
       summary: Lists all routes
       operationId: listRoutes
@@ -112,7 +112,7 @@ paths:
           required: false
           schema:
             type: string
-            $ref: '#/components/schemas/RouteType'
+            $ref: "#/components/schemas/RouteType"
         - name: accessRights
           in: query
           description: access rights of the route
@@ -121,20 +121,20 @@ paths:
             type: string
             enum: [PUBLIC_ONLY, PRIVATE_ONLY]
       responses:
-        '200':
+        "200":
           description: An array of routes
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Route'
+                  $ref: "#/components/schemas/Route"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /v1/routes/{routeId}:
     get:
       summary: Finds a route
@@ -150,18 +150,18 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: A found route
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Route'
+                $ref: "#/components/schemas/Route"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     delete:
       summary: Deletes a route
       operationId: deleteRoute
@@ -176,14 +176,14 @@ paths:
             type: string
             format: uuid
       responses:
-        '204':
+        "204":
           description: Empty result indication of a successful removal
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v1/totalExposure:
     get:
@@ -207,18 +207,18 @@ paths:
             type: string
             format: date-time
       responses:
-        '200':
+        "200":
           description: The total exposure of a user
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExposureInstance'
+                $ref: "#/components/schemas/ExposureInstance"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /v1/exposureInstances:
     post:
       summary: Creates an exposure instance
@@ -229,22 +229,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ExposureInstance'
+              $ref: "#/components/schemas/ExposureInstance"
       tags:
         - ExposureInstances
       responses:
-        '200':
+        "200":
           description: A created exposure instance
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExposureInstance'
+                $ref: "#/components/schemas/ExposureInstance"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     get:
       summary: Lists exposure instances
       operationId: listExposureInstances
@@ -264,22 +264,22 @@ paths:
           required: false
           schema:
             type: string
-            format:  date-time
+            format: date-time
       responses:
-        '200':
+        "200":
           description: An array of exposure instances
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExposureInstance'
+                  $ref: "#/components/schemas/ExposureInstance"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /v1/exposureInstances/{exposureInstanceId}:
     get:
       summary: Finds an exposure instance
@@ -295,18 +295,18 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: A found exposure instance
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExposureInstance'
+                $ref: "#/components/schemas/ExposureInstance"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     delete:
       summary: Deletes an exposure instance
       operationId: deleteExposureInstance
@@ -321,14 +321,14 @@ paths:
             type: string
             format: uuid
       responses:
-        '204':
+        "204":
           description: Empty result indication of a successful removal
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /v1/airQuality:
     post:
       summary: Get air quality for array of coordinates
@@ -360,18 +360,18 @@ paths:
               items:
                 type: string
       responses:
-        '200':
+        "200":
           description: Air quality values
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RouteAirQuality'
+                $ref: "#/components/schemas/RouteAirQuality"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     get:
       summary: Get air quality data
       operationId: getAirQuality
@@ -405,20 +405,20 @@ paths:
             type: string
             format: date-time
       responses:
-        '200':
+        "200":
           description: Air quality values
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/AirQuality'
+                  $ref: "#/components/schemas/AirQuality"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v1/airQuality/{coordinates}/{pollutantId}:
     get:
@@ -448,18 +448,18 @@ paths:
             type: string
             format: date-time
       responses:
-        '200':
+        "200":
           description: The air quality for a specific coordinate
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AirQuality'
+                $ref: "#/components/schemas/AirQuality"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /v1/users:
     post:
       summary: Creates new user
@@ -472,20 +472,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
       responses:
-        '200':
+        "200":
           description: User settings
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v1/users/{userId}:
     get:
@@ -502,18 +502,18 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: User
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     put:
       summary: Updates user data for the user who is logged in
       operationId: updateUser
@@ -533,20 +533,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/User"
       responses:
-        '200':
+        "200":
           description: User settings
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     delete:
       summary: Deletes user who is logged in
       operationId: deleteUser
@@ -561,14 +561,14 @@ paths:
             type: string
             format: uuid
       responses:
-        '204':
+        "204":
           description: Empty result indication of a successful removal
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   "/v1/users/{userId}/cards":
     get:
@@ -599,7 +599,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     post:
       operationId: createUserStripeCard
       summary: Create user card
@@ -633,7 +633,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   "/v1/users/{userId}/cards/{cardId}":
     get:
@@ -668,7 +668,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     put:
       operationId: updateUserStripeCard
       summary: Update user card
@@ -708,7 +708,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     delete:
       operationId: deleteUserStripeCard
       summary: Delete user card
@@ -737,7 +737,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v1/users/{userId}/subscriptions:
     get:
@@ -754,20 +754,20 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: User subscriptions
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/StripeSubscription'
+                  $ref: "#/components/schemas/StripeSubscription"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     post:
       summary: Create user subscription
       operationId: createUserStripeSubscription
@@ -787,21 +787,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StripeSubscription'
+              $ref: "#/components/schemas/StripeSubscription"
       responses:
-        '200':
+        "200":
           description: Created user subscription
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StripeSubscription'
+                $ref: "#/components/schemas/StripeSubscription"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-  
+                $ref: "#/components/schemas/Error"
+
   /v1/users/{userId}/subscriptions/{subscriptionId}:
     get:
       summary: Find user subscription
@@ -823,18 +823,18 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: A user subscription found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StripeSubscription'
+                $ref: "#/components/schemas/StripeSubscription"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     put:
       summary: Update user subscription
       operationId: updateUserStripeSubscription
@@ -860,20 +860,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StripeSubscription'
+              $ref: "#/components/schemas/StripeSubscription"
       responses:
-        '200':
+        "200":
           description: Updated user subscription
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StripeSubscription'
+                $ref: "#/components/schemas/StripeSubscription"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     delete:
       summary: Cancel user subscription
       operationId: cancelUserStripeSubscription
@@ -894,18 +894,18 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Cancelled user subscription
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StripeSubscription'
+                $ref: "#/components/schemas/StripeSubscription"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v1/users/data:
     get:
@@ -914,7 +914,7 @@ paths:
       tags:
         - Users
       responses:
-        '200':
+        "200":
           description: User data
           content:
             application/zip:
@@ -926,7 +926,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v1/favourites:
     get:
@@ -935,20 +935,20 @@ paths:
       tags:
         - FavouriteLocations
       responses:
-        '200':
+        "200":
           description: An array of user favourite locations
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/FavouriteLocation'
+                  $ref: "#/components/schemas/FavouriteLocation"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     post:
       summary: Creates a new user favourite location
       operationId: createUserFavouriteLocation
@@ -960,20 +960,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FavouriteLocation'
+              $ref: "#/components/schemas/FavouriteLocation"
       responses:
-        '200':
+        "200":
           description: A new favourite location
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FavouriteLocation'
+                $ref: "#/components/schemas/FavouriteLocation"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /v1/favourites/{favouriteId}:
     put:
       summary: Updates details for an user favourite location
@@ -994,20 +994,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FavouriteLocation'
+              $ref: "#/components/schemas/FavouriteLocation"
       responses:
-        '200':
+        "200":
           description: An updated favourite location
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FavouriteLocation'
+                $ref: "#/components/schemas/FavouriteLocation"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     delete:
       summary: Deletes an user favourite location
       operationId: deleteUserFavouriteLocation
@@ -1022,14 +1022,14 @@ paths:
             type: string
             format: uuid
       responses:
-        '204':
+        "204":
           description: Empty result indication of a successful removal
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v1/medicalConditions:
     get:
@@ -1038,20 +1038,20 @@ paths:
       tags:
         - MedicalConditions
       responses:
-        '200':
+        "200":
           description: found medical conditions
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/MedicalCondition'
+                  $ref: "#/components/schemas/MedicalCondition"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     post:
       summary: Creates a new medical condition
       operationId: createMedicalCondition
@@ -1063,20 +1063,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MedicalCondition'
+              $ref: "#/components/schemas/MedicalCondition"
       responses:
-        '200':
+        "200":
           description: New medical condition
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MedicalCondition'
+                $ref: "#/components/schemas/MedicalCondition"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v1/medicalConditions/{medicalConditionId}:
     get:
@@ -1093,18 +1093,18 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: A found medical condition
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MedicalCondition'
+                $ref: "#/components/schemas/MedicalCondition"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     put:
       summary: Updates medical condition
       operationId: updateMedicalCondition
@@ -1124,20 +1124,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MedicalCondition'
+              $ref: "#/components/schemas/MedicalCondition"
       responses:
-        '200':
+        "200":
           description: Medical condition
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MedicalCondition'
+                $ref: "#/components/schemas/MedicalCondition"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     delete:
       summary: Deletes a medical condition
       operationId: deleteMedicalCondition
@@ -1152,14 +1152,14 @@ paths:
             type: string
             format: uuid
       responses:
-        '204':
+        "204":
           description: Empty result indication of a successful removal
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v1/pollutants:
     get:
@@ -1175,20 +1175,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: found pollutants
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Pollutant'
+                  $ref: "#/components/schemas/Pollutant"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v1/pollutants/{pollutantId}:
     get:
@@ -1205,18 +1205,18 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: A found pollutant
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pollutant'
+                $ref: "#/components/schemas/Pollutant"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     put:
       summary: Updates pollutant
       operationId: updatePollutant
@@ -1236,20 +1236,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pollutant'
+              $ref: "#/components/schemas/Pollutant"
       responses:
-        '200':
+        "200":
           description: Pollutant
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pollutant'
+                $ref: "#/components/schemas/Pollutant"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     delete:
       summary: Deletes pollutant
       operationId: deletePollutant
@@ -1264,14 +1264,14 @@ paths:
             type: string
             format: uuid
       responses:
-        '204':
+        "204":
           description: Empty result indication of a successful removal
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v1/routingModes:
     get:
@@ -1287,20 +1287,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: found routing modes
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/DefaultRoutingMode'
+                  $ref: "#/components/schemas/DefaultRoutingMode"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     post:
       summary: Creates a new default routing mode
       operationId: createRoutingMode
@@ -1312,20 +1312,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DefaultRoutingMode'
+              $ref: "#/components/schemas/DefaultRoutingMode"
       responses:
-        '200':
+        "200":
           description: Created routing mode
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultRoutingMode'
+                $ref: "#/components/schemas/DefaultRoutingMode"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v1/routingModes/{routingModeId}:
     get:
@@ -1342,18 +1342,18 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: A found routing mode
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultRoutingMode'
+                $ref: "#/components/schemas/DefaultRoutingMode"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     put:
       summary: Updates routing mode
       operationId: updateRoutingMode
@@ -1373,20 +1373,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DefaultRoutingMode'
+              $ref: "#/components/schemas/DefaultRoutingMode"
       responses:
-        '200':
+        "200":
           description: Updated default routing mode
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultRoutingMode'
+                $ref: "#/components/schemas/DefaultRoutingMode"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     delete:
       summary: Deletes routing mode
       operationId: deleteRoutingMode
@@ -1401,14 +1401,14 @@ paths:
             type: string
             format: uuid
       responses:
-        '204':
+        "204":
           description: Empty result indication of a successful removal
         default:
           description: unexpected error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
 components:
   securitySchemes:
@@ -1436,7 +1436,7 @@ components:
         pollutionValues:
           type: array
           items:
-            $ref: '#/components/schemas/PollutionEntry'
+            $ref: "#/components/schemas/PollutionEntry"
 
     Route:
       type: object
@@ -1461,13 +1461,13 @@ components:
           type: string
         routeType:
           type: string
-          $ref: '#/components/schemas/RouteType'
+          $ref: "#/components/schemas/RouteType"
         isPublic:
           type: boolean
         steps:
           type: array
           items:
-            $ref: '#/components/schemas/RouteStep'
+            $ref: "#/components/schemas/RouteStep"
         savedAt:
           type: string
           format: date-time
@@ -1503,11 +1503,11 @@ components:
         - location
       properties:
         location:
-          $ref: '#/components/schemas/Location'
+          $ref: "#/components/schemas/Location"
         pollutionValues:
           type: array
           items:
-            $ref: '#/components/schemas/PollutionEntry'
+            $ref: "#/components/schemas/PollutionEntry"
 
     Address:
       type: object
@@ -1545,7 +1545,7 @@ components:
           type: number
           format: float
         address:
-          $ref: '#/components/schemas/Address'
+          $ref: "#/components/schemas/Address"
 
     MedicalCondition:
       type: object
@@ -1563,7 +1563,7 @@ components:
         conditionPenalties:
           type: array
           items:
-            $ref: '#/components/schemas/PollutantPenalty'
+            $ref: "#/components/schemas/PollutantPenalty"
 
     PollutantPenalty:
       type: object
@@ -1614,7 +1614,7 @@ components:
           type: number
           format: float
         requestParameters:
-          $ref: '#/components/schemas/PollutantRequestParameter'
+          $ref: "#/components/schemas/PollutantRequestParameter"
 
     PollutantRequestParameter:
       type: object
@@ -1660,13 +1660,13 @@ components:
         password:
           type: string
         homeAddress:
-          $ref: '#/components/schemas/Address'
+          $ref: "#/components/schemas/Address"
         showMobileWelcomeScreen:
           type: boolean
         pollutantPenalties:
           type: array
           items:
-            $ref: '#/components/schemas/PollutantPenalty'
+            $ref: "#/components/schemas/PollutantPenalty"
         medicalConditions:
           type: array
           items:
@@ -1674,10 +1674,10 @@ components:
             format: uuid
         transportPreference:
           type: string
-          $ref: '#/components/schemas/RouteType'
+          $ref: "#/components/schemas/RouteType"
         subscriptionStatus:
           type: string
-          $ref: '#/components/schemas/StripeSubscriptionStatus'
+          $ref: "#/components/schemas/StripeSubscriptionStatus"
 
     RouteAirQuality:
       type: object
@@ -1689,11 +1689,11 @@ components:
         airQualityEntries:
           type: array
           items:
-            $ref: '#/components/schemas/AirQuality'
+            $ref: "#/components/schemas/AirQuality"
         pollutionDataTotals:
           type: array
           items:
-            $ref: '#/components/schemas/PollutionEntry'
+            $ref: "#/components/schemas/PollutionEntry"
 
     DefaultRoutingMode:
       type: object
@@ -1709,11 +1709,11 @@ components:
         name:
           type: string
         icon:
-          $ref: '#/components/schemas/RoutingModeIcon'
+          $ref: "#/components/schemas/RoutingModeIcon"
         pollutantPenalties:
           type: array
           items:
-            $ref: '#/components/schemas/PollutantPenalty'
+            $ref: "#/components/schemas/PollutantPenalty"
 
     RouteType:
       type: string
@@ -1767,7 +1767,7 @@ components:
           type: boolean
         elevation:
           type: string
-    
+
     StripeProductPrice:
       type: object
       properties:
@@ -1780,7 +1780,7 @@ components:
         intervalCount:
           type: integer
           format: int64
-    
+
     StripeProduct:
       type: object
       description: Object describing stripe product
@@ -1790,7 +1790,7 @@ components:
           description: Stripe product id
         name:
           type: string
-    
+
     StripeSubscription:
       type: object
       description: Object describing stripe subscription
