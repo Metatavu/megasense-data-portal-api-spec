@@ -106,13 +106,13 @@ paths:
       tags:
         - Routes
       parameters:
-        - name: routeType
+        - name: routeHistoryType
           in: query
-          description: Route type
+          description: Route history type
           required: false
           schema:
             type: string
-            $ref: "#/components/schemas/RouteType"
+            $ref: "#/components/schemas/RouteHistoryType"
         - name: transportationType
           in: query
           description: Route movement type
@@ -1453,7 +1453,7 @@ components:
         - locationFromName
         - locationToName
         - isPublic
-        - routeType
+        - routeHistoryType
         - transportationType
       properties:
         id:
@@ -1467,9 +1467,9 @@ components:
           type: string
         locationToName:
           type: string
-        routeType:
+        routeHistoryType:
           type: string
-          $ref: "#/components/schemas/RouteType"
+          $ref: "#/components/schemas/RouteHistoryType"
         transportationType:
           type: string
           $ref: "#/components/schemas/TransportationType"
@@ -1726,9 +1726,9 @@ components:
           items:
             $ref: "#/components/schemas/PollutantPenalty"
 
-    RouteType:
+    RouteHistoryType:
       type: string
-      description: Route type
+      description: Route saving type
       enum:
         - FAVORITE
         - HISTORY
