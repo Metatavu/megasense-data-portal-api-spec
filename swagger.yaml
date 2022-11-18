@@ -1453,7 +1453,6 @@ components:
         - locationFromName
         - locationToName
         - isPublic
-        - routeHistoryType
         - transportationType
       properties:
         id:
