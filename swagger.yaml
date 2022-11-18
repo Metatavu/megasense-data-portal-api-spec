@@ -1809,6 +1809,8 @@ components:
         currentPeriodEnd:
           type: integer
           format: int64
+        clientSecret:
+          type: string
 
     StripeCard:
       type: object
@@ -1818,8 +1820,6 @@ components:
         brand:
           type: string
         last4:
-          type: string
-        sourceToken:
           type: string
 
     StripeSubscriptionStatus:
