@@ -1454,6 +1454,7 @@ components:
         - locationToName
         - isPublic
         - transportationType
+        - routeHistoryType
       properties:
         id:
           type: string
