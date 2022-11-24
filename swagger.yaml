@@ -106,13 +106,20 @@ paths:
       tags:
         - Routes
       parameters:
-        - name: routeType
+        - name: routeHistoryType
+          in: query
+          description: Route history type
+          required: false
+          schema:
+            type: string
+            $ref: "#/components/schemas/RouteHistoryType"
+        - name: transportationType
           in: query
           description: Route movement type
           required: false
           schema:
             type: string
-            $ref: "#/components/schemas/RouteType"
+            $ref: "#/components/schemas/TransportationType"
         - name: accessRights
           in: query
           description: access rights of the route
@@ -1446,7 +1453,8 @@ components:
         - locationFromName
         - locationToName
         - isPublic
-        - routeType
+        - transportationType
+        - routeHistoryType
       properties:
         id:
           type: string
@@ -1459,9 +1467,12 @@ components:
           type: string
         locationToName:
           type: string
-        routeType:
+        routeHistoryType:
           type: string
-          $ref: "#/components/schemas/RouteType"
+          $ref: "#/components/schemas/RouteHistoryType"
+        transportationType:
+          type: string
+          $ref: "#/components/schemas/TransportationType"
         isPublic:
           type: boolean
         steps:
@@ -1674,7 +1685,7 @@ components:
             format: uuid
         transportPreference:
           type: string
-          $ref: "#/components/schemas/RouteType"
+          $ref: "#/components/schemas/TransportationType"
         subscriptionStatus:
           type: string
           $ref: "#/components/schemas/StripeSubscriptionStatus"
@@ -1715,7 +1726,14 @@ components:
           items:
             $ref: "#/components/schemas/PollutantPenalty"
 
-    RouteType:
+    RouteHistoryType:
+      type: string
+      description: Route saving type
+      enum:
+        - FAVORITE
+        - HISTORY
+
+    TransportationType:
       type: string
       description: Route transportantion type
       enum:
