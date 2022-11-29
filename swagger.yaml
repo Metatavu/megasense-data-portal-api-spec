@@ -1824,7 +1824,9 @@ components:
 
     StripeSubscriptionStatus:
       type: string
+      description: Status where PENDING is the initial status which is not yet set up in payment system, ACTIVE means subscription with functional payments, NOT_PAID is status where payments are not working, ENDED is for cancelled and unpaid subscriptions
       enum:
+        - PENDING
         - ACTIVE
         - NOT_PAID
         - ENDED
