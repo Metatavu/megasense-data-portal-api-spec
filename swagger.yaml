@@ -1829,6 +1829,9 @@ components:
           format: int64
         clientSecret:
           type: string
+        defaultPaymentMethodId:
+          description: ID of default payment method
+          type: string
 
     StripeCard:
       type: object
