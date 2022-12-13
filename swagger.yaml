@@ -642,6 +642,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  "/v1/users/{userId}/cards/checkout":
+    post:
+      operationId: createUserStripeCardIntent
+      summary: Create user card setup intent
+      description: Creates user card setup intent for new card payment method which will not be charged immediately
+      tags:
+        - UserCards
+      parameters:
+        - name: userId
+          in: path
+          description: The user to be updated
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Created reportImage
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Setup intent secret
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   "/v1/users/{userId}/cards/{cardId}":
     get:
       operationId: findUserStripeCard
