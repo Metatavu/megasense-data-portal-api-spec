@@ -1865,6 +1865,10 @@ components:
         defaultPaymentMethodId:
           description: ID of default payment method
           type: string
+        invoices:
+          type: array
+          items:
+            $ref: "#/components/schemas/StripeInvoice"
 
     StripeCard:
       type: object
@@ -1884,3 +1888,18 @@ components:
         - ACTIVE
         - NOT_PAID
         - ENDED
+
+    StripeInvoice:
+      type: object
+      description: Object partially describing stripe invoice
+      properties:
+        amount:
+          type: integer
+          format: int64
+        currency:
+          type: string
+        date:
+          type: integer
+          format: int64
+        paid:
+          type: boolean
