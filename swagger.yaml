@@ -194,7 +194,7 @@ paths:
 
   /v1/totalExposure:
     get:
-      summary: Gets the total exposure of a user
+      summary: Gets the total exposure of a user based on its history
       operationId: totalExposure
       tags:
         - TotalExposure
@@ -338,7 +338,7 @@ paths:
                 $ref: "#/components/schemas/Error"
   /v1/airQuality:
     post:
-      summary: Get air quality for array of coordinates
+      summary: Gets air quality for array of coordinates from airquality data file
       operationId: getAirQualityForCoordinatesArray
       tags:
         - AirQuality
@@ -429,7 +429,7 @@ paths:
 
   /v1/airQuality/{coordinates}/{pollutantId}:
     get:
-      summary: Get air quality for specific coordinates
+      summary: Get air quality for specific coordinates from airquality data file
       operationId: getAirQualityForCoordinates
       tags:
         - AirQuality
@@ -1457,6 +1457,7 @@ components:
   schemas:
     ExposureInstance:
       type: object
+      description: List of pollution entries that were encountered at a route during a given period. Not requested in real-time from netcdf file but preserved in the database.
       properties:
         id:
           type: string
@@ -1477,6 +1478,7 @@ components:
 
     Route:
       type: object
+      description: Saved route, either for route history or as favorite.
       required:
         - name
         - routePoints
@@ -1526,6 +1528,7 @@ components:
 
     Location:
       type: object
+      description: location with given lat and lon coordinates
       required:
         - latitude
         - longitude
@@ -1539,6 +1542,7 @@ components:
 
     AirQuality:
       type: object
+      description: air quality data from the netcdf file for the given location
       required:
         - pollutionValues
         - location
@@ -1569,6 +1573,7 @@ components:
 
     FavouriteLocation:
       type: object
+      description: saved location
       required:
         - name
         - latitude
@@ -1608,6 +1613,7 @@ components:
 
     PollutantPenalty:
       type: object
+      description: Penalty for the maximum allowed pollution values of the pollutant
       required:
         - penalty
         - threshold
@@ -1656,9 +1662,11 @@ components:
           format: float
         requestParameters:
           $ref: "#/components/schemas/PollutantRequestParameter"
+          description: Parameter that is used for OTP routing for the given pollutant
 
     PollutantRequestParameter:
       type: object
+      description: Parameter that is used for OTP routing for the given pollutant
       required:
         - penaltyRequestParameter
         - thresholdRequestParameter
@@ -1670,6 +1678,7 @@ components:
 
     PollutionEntry:
       type: object
+      description: Pollution data for the given pollutant
       properties:
         pollutantId:
           type: string
@@ -1711,6 +1720,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/PollutantPenalty"
+          description: user's personal pollutant penalty settings
         medicalConditions:
           type: array
           items:
@@ -1722,10 +1732,11 @@ components:
         subscriptionStatus:
           type: string
           $ref: "#/components/schemas/StripeSubscriptionStatus"
+          description: status of Stripe subscription
 
     RouteAirQuality:
       type: object
-      description: Total air quality data for the array of coordinates
+      description: Total air quality data from netcdf file for the array of coordinates for the route
       required:
         - airQualityEntries
         - pollutionDataTotals
