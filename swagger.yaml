@@ -1704,7 +1704,9 @@ components:
         password:
           type: string
         homeAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/FavouriteLocation"
+        workAddress:
+          $ref: "#/components/schemas/FavouriteLocation"
         showMobileWelcomeScreen:
           type: boolean
         pollutantPenalties:
