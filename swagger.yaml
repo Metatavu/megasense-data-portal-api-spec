@@ -260,6 +260,13 @@ paths:
       tags:
         - RoutePollutionExposureRecords
       parameters:
+        - name: routeId
+          in: query
+          description: Route id
+          required: false
+          schema:
+            type: string
+            format: uuid
         - name: createdBefore
           in: query
           description: Created before time
