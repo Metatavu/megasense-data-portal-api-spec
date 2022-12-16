@@ -1703,9 +1703,9 @@ components:
           description: User email
         password:
           type: string
-        homeAddress:
+        homeLocation:
           $ref: "#/components/schemas/FavouriteLocation"
-        workAddress:
+        workLocation:
           $ref: "#/components/schemas/FavouriteLocation"
         showMobileWelcomeScreen:
           type: boolean
