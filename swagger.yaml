@@ -1903,3 +1903,5 @@ components:
           format: int64
         paid:
           type: boolean
+        cardLast4:
+          type: string
