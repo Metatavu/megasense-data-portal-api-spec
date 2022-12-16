@@ -194,7 +194,7 @@ paths:
 
   /v1/totalExposure:
     get:
-      summary: Gets the total exposure of a user
+      summary: Gets the total exposure of a user based on its history
       operationId: totalExposure
       tags:
         - TotalExposure
@@ -219,33 +219,34 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExposureInstance"
+                $ref: "#/components/schemas/RoutePollutionExposureRecord"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /v1/exposureInstances:
+  /v1/routePollutionExposureRecords:
     post:
       summary: Creates an exposure instance
-      operationId: createExposureInstance
+      operationId: createRoutePollutionExposureRecord
+      description: Creates a pollution record for the user on the route
       requestBody:
         description: An exposure instance to be created
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ExposureInstance"
+              $ref: "#/components/schemas/RoutePollutionExposureRecord"
       tags:
-        - ExposureInstances
+        - RoutePollutionExposureRecords
       responses:
         "200":
           description: A created exposure instance
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExposureInstance"
+                $ref: "#/components/schemas/RoutePollutionExposureRecord"
         default:
           description: unexpected error
           content:
@@ -254,10 +255,18 @@ paths:
                 $ref: "#/components/schemas/Error"
     get:
       summary: Lists exposure instances
-      operationId: listExposureInstances
+      operationId: listRoutePollutionExposureRecords
+      description: Lists pollution records that user was exposed to during routing (pollution data comes from user history, not from air quality data file)
       tags:
-        - ExposureInstances
+        - RoutePollutionExposureRecords
       parameters:
+        - name: routeId
+          in: query
+          description: Route id
+          required: false
+          schema:
+            type: string
+            format: uuid
         - name: createdBefore
           in: query
           description: Created before time
@@ -280,21 +289,21 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/ExposureInstance"
+                  $ref: "#/components/schemas/RoutePollutionExposureRecord"
         default:
           description: unexpected error
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /v1/exposureInstances/{exposureInstanceId}:
+  /v1/routePollutionExposureRecords/{RoutePollutionExposureRecordId}:
     get:
-      summary: Finds an exposure instance
-      operationId: findExposureInstance
+      summary: Finds an exposure record
+      operationId: findRoutePollutionExposureRecord
       tags:
-        - ExposureInstances
+        - RoutePollutionExposureRecords
       parameters:
-        - name: exposureInstanceId
+        - name: RoutePollutionExposureRecordId
           in: path
           description: Exposure instance id
           required: true
@@ -307,7 +316,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExposureInstance"
+                $ref: "#/components/schemas/RoutePollutionExposureRecord"
         default:
           description: unexpected error
           content:
@@ -316,11 +325,11 @@ paths:
                 $ref: "#/components/schemas/Error"
     delete:
       summary: Deletes an exposure instance
-      operationId: deleteExposureInstance
+      operationId: deleteRoutePollutionExposureRecord
       tags:
-        - ExposureInstances
+        - RoutePollutionExposureRecords
       parameters:
-        - name: exposureInstanceId
+        - name: RoutePollutionExposureRecordId
           in: path
           description: Exposure instance id
           required: true
@@ -338,7 +347,7 @@ paths:
                 $ref: "#/components/schemas/Error"
   /v1/airQuality:
     post:
-      summary: Get air quality for array of coordinates
+      summary: Gets air quality for array of coordinates (passed as request body) from airquality data file
       operationId: getAirQualityForCoordinatesArray
       tags:
         - AirQuality
@@ -368,11 +377,11 @@ paths:
                 type: string
       responses:
         "200":
-          description: Air quality values
+          description: Air quality values for the coordiates array
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/RouteAirQuality"
+                $ref: "#/components/schemas/RoutePointsAirQuality"
         default:
           description: unexpected error
           content:
@@ -382,6 +391,7 @@ paths:
     get:
       summary: Get air quality data
       operationId: getAirQuality
+      description: Gets air quality for the area in the bounding box from airquality data file
       tags:
         - AirQuality
       parameters:
@@ -429,7 +439,7 @@ paths:
 
   /v1/airQuality/{coordinates}/{pollutantId}:
     get:
-      summary: Get air quality for specific coordinates
+      summary: Get air quality for specific coordinates from airquality data file
       operationId: getAirQualityForCoordinates
       tags:
         - AirQuality
@@ -471,6 +481,7 @@ paths:
     post:
       summary: Creates new user
       operationId: createUser
+      description: Creates new user
       tags:
         - Users
       requestBody:
@@ -496,7 +507,7 @@ paths:
 
   /v1/users/{userId}:
     get:
-      summary: Gets user settings of the user who is logged in
+      summary: Gets user settings by the user id
       operationId: getUser
       tags:
         - Users
@@ -522,7 +533,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     put:
-      summary: Updates user data for the user who is logged in
+      summary: Updates user data
       operationId: updateUser
       tags:
         - Users
@@ -555,7 +566,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
     delete:
-      summary: Deletes user who is logged in
+      summary: Deletes user
       operationId: deleteUser
       tags:
         - Users
@@ -581,7 +592,7 @@ paths:
     get:
       operationId: listUserStripeCards
       summary: Lists user cards
-      description: Lists user cards
+      description: Lists user stripe cards
       tags:
         - UserCards
       parameters:
@@ -610,7 +621,7 @@ paths:
     post:
       operationId: createUserStripeCard
       summary: Create user card
-      description: Creates user card
+      description: Creates user stripe card
       tags:
         - UserCards
       parameters:
@@ -646,7 +657,7 @@ paths:
     post:
       operationId: createUserStripeCardIntent
       summary: Create user card setup intent
-      description: Creates user card setup intent for new card payment method which will not be charged immediately
+      description: Creates user card setup intent for new card payment method which will not be charged immediately (used for adding additional cards)
       tags:
         - UserCards
       parameters:
@@ -676,7 +687,7 @@ paths:
     get:
       operationId: findUserStripeCard
       summary: Finds user card
-      description: Finds a user card
+      description: Finds a user stripe card
       tags:
         - UserCards
       parameters:
@@ -1455,8 +1466,9 @@ components:
       bearerFormat: JWT
 
   schemas:
-    ExposureInstance:
+    RoutePollutionExposureRecord:
       type: object
+      description: List of pollution entries that were encountered at a route during a given period. Not requested in real-time from netcdf file but preserved in the database.
       properties:
         id:
           type: string
@@ -1470,13 +1482,18 @@ components:
         endedAt:
           type: string
           format: date-time
-        pollutionValues:
+        pollutionValuesForRoute:
+          type: array
+          items:
+            $ref: "#/components/schemas/AirQuality"
+        pollutionDataTotals:
           type: array
           items:
             $ref: "#/components/schemas/PollutionEntry"
 
     Route:
       type: object
+      description: Saved route, either for route history or as favorite.
       required:
         - name
         - routePoints
@@ -1526,6 +1543,7 @@ components:
 
     Location:
       type: object
+      description: location with given lat and lon coordinates
       required:
         - latitude
         - longitude
@@ -1539,6 +1557,7 @@ components:
 
     AirQuality:
       type: object
+      description: air quality data for the given location
       required:
         - pollutionValues
         - location
@@ -1569,6 +1588,7 @@ components:
 
     FavouriteLocation:
       type: object
+      description: saved location
       required:
         - name
         - latitude
@@ -1608,6 +1628,7 @@ components:
 
     PollutantPenalty:
       type: object
+      description: Penalty for the maximum allowed pollution values of the pollutant
       required:
         - penalty
         - threshold
@@ -1656,9 +1677,11 @@ components:
           format: float
         requestParameters:
           $ref: "#/components/schemas/PollutantRequestParameter"
+          description: Parameter that is used for OTP routing for the given pollutant
 
     PollutantRequestParameter:
       type: object
+      description: Parameter that is used for OTP routing for the given pollutant
       required:
         - penaltyRequestParameter
         - thresholdRequestParameter
@@ -1670,6 +1693,7 @@ components:
 
     PollutionEntry:
       type: object
+      description: Pollution data for the given pollutant
       properties:
         pollutantId:
           type: string
@@ -1711,6 +1735,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/PollutantPenalty"
+          description: user's personal pollutant penalty settings
         medicalConditions:
           type: array
           items:
@@ -1722,10 +1747,11 @@ components:
         subscriptionStatus:
           type: string
           $ref: "#/components/schemas/StripeSubscriptionStatus"
+          description: status of Stripe subscription
 
-    RouteAirQuality:
+    RoutePointsAirQuality:
       type: object
-      description: Total air quality data for the array of coordinates
+      description: Total air quality data for the array of coordinates for the route
       required:
         - airQualityEntries
         - pollutionDataTotals
