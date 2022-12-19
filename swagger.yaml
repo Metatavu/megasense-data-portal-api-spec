@@ -1727,8 +1727,10 @@ components:
           description: User email
         password:
           type: string
-        homeAddress:
-          $ref: "#/components/schemas/Address"
+        homeLocation:
+          $ref: "#/components/schemas/FavouriteLocation"
+        workLocation:
+          $ref: "#/components/schemas/FavouriteLocation"
         showMobileWelcomeScreen:
           type: boolean
         pollutantPenalties:
