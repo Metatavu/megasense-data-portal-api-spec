@@ -1497,6 +1497,7 @@ components:
       required:
         - name
         - routePoints
+        - locationNames
         - locationFromName
         - locationToName
         - isPublic
@@ -1510,6 +1511,9 @@ components:
           type: string
         routePoints:
           type: string
+        locationNames:
+          type: string
+          description: Compressed location names along the route
         locationFromName:
           type: string
         locationToName:
