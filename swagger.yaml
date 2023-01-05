@@ -1595,8 +1595,6 @@ components:
       description: saved location
       required:
         - name
-        - latitude
-        - longitude
       properties:
         id:
           type: string
