@@ -1533,6 +1533,10 @@ components:
         savedAt:
           type: string
           format: date-time
+        routeDistance:
+          type: number
+          format: float
+          description: Length of the saved route in meters
     Error:
       type: object
       required:
