@@ -347,7 +347,7 @@ paths:
                 $ref: "#/components/schemas/Error"
   /v1/airQuality:
     post:
-      summary: Gets air quality for array of coordinates (passed as request body) from airquality data file
+      summary: Gets air quality for array of coordinates (passed as request body) from airquality data file and optionally user's calculated exposure.
       operationId: getAirQualityForCoordinatesArray
       tags:
         - AirQuality
@@ -361,11 +361,19 @@ paths:
             format: uuid
         - name: routingTime
           in: query
-          description: Time of requested air quality data
+          description: Time of requested air quality data, if missing, the latest available data will be used.
           required: false
           schema:
             type: string
             format: date-time
+        - name: routingEnd
+          in: query
+          description: Time when the route is finished, if missing, no route exposure will be calculated
+          required: false
+          schema:
+            type: string
+            format: date-time
+
       requestBody:
         description: coordinates of route
         required: true
@@ -377,7 +385,7 @@ paths:
                 type: string
       responses:
         "200":
-          description: Air quality values for the coordiates array
+          description: Air quality data for the given coordinates and optionally the user's exposure to chemicals while taking the route
           content:
             application/json:
               schema:
@@ -1468,7 +1476,7 @@ components:
   schemas:
     RoutePollutionExposureRecord:
       type: object
-      description: List of pollution entries that were encountered at a route during a given period. Not requested in real-time from netcdf file but preserved in the database.
+      description: Historical entry of the pollutants and exposure that the user encountered. Not requested in real-time but preserved in the database.
       properties:
         id:
           type: string
@@ -1483,10 +1491,12 @@ components:
           type: string
           format: date-time
         pollutionValuesForRoute:
+          description: List of air quality entries for all the route points
           type: array
           items:
             $ref: "#/components/schemas/AirQuality"
         pollutionDataTotals:
+          description: List of pollution exposure entries that user breathed during travelling the route
           type: array
           items:
             $ref: "#/components/schemas/PollutionEntry"
@@ -1761,16 +1771,20 @@ components:
 
     RoutePointsAirQuality:
       type: object
-      description: Total air quality data for the array of coordinates for the route
+      description: Read-only air quality data for the array of coordinates of the route and corresponding exposure values
       required:
         - airQualityEntries
         - pollutionDataTotals
       properties:
         airQualityEntries:
+          description: List of air qualities for the coordinates passed in original request
+          readOnly: true
           type: array
           items:
             $ref: "#/components/schemas/AirQuality"
         pollutionDataTotals:
+          description: List of exposure values that the user would consume during the trip along the coordinates route for the given time
+          readOnly: true
           type: array
           items:
             $ref: "#/components/schemas/PollutionEntry"
