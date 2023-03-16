@@ -1555,6 +1555,9 @@ components:
     PassiveExposureMeasurementRequest: 
       type: object
       description: Passive exposure collection request. Object is used to create requests of passive exposure collection from the API
+      required:
+        - time
+        - location
       properties:
         time:
           type: string
@@ -1565,8 +1568,6 @@ components:
     PassiveExposureMeasurement:
       type: object
       description: Single pasive exposure measurement
-      required:
-        - measuredAt
       properties:
         id:
           type: string
@@ -1574,6 +1575,7 @@ components:
         time:
           type: string
           format: date-time
+          readOnly: true
         airQuality:
           $ref: "#/components/schemas/AirQuality"
 
