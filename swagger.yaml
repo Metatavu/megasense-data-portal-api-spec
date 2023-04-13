@@ -345,6 +345,67 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+
+  /v1/passiveExposure:
+    post:
+      summary: Request passive exposure measurement
+      operationId: requestPassiveExposureMeasurement
+      description: Requests passive exposure collection for given time and location.
+      requestBody:
+        description: Passive exposure collection request.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PassiveExposureMeasurementRequest"
+      tags:
+        - PassiveExposureMeasurements
+      responses:
+        "202":
+          description: The request has been accepted for processing. Measurement is not necessarily ready yet but has been accepted to be processed in the near future. 
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      summary: Lists passive exposure measurements
+      operationId: listPassiveExposureMeasurements
+      description: Lists passive exposure measurement for given time range
+      tags:
+        - PassiveExposureMeasurements
+      parameters:
+        - name: before
+          in: query
+          description: Returns only results that have been collected from before given time. Date time is handled in inclusive way (contains also measurements from the given time)
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: after
+          in: query
+          description: Returns only results that have been collected from after given time. Date time is handled in inclusive way (contains also measurements from the given time)
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: An array of exposure instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PassiveExposureMeasurement"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+                
   /v1/airQuality:
     post:
       summary: Gets air quality for array of coordinates (passed as request body) from airquality data file and optionally user's calculated exposure.
@@ -1500,6 +1561,33 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/PollutionEntry"
+    
+    PassiveExposureMeasurementRequest: 
+      type: object
+      description: Passive exposure collection request. Object is used to create requests of passive exposure collection from the API
+      required:
+        - time
+        - location
+      properties:
+        time:
+          type: string
+          format: date-time
+        location:
+          $ref: "#/components/schemas/Location"
+
+    PassiveExposureMeasurement:
+      type: object
+      description: Single pasive exposure measurement
+      properties:
+        id:
+          type: string
+          format: uuid
+        time:
+          type: string
+          format: date-time
+          readOnly: true
+        airQuality:
+          $ref: "#/components/schemas/AirQuality"
 
     Route:
       type: object
