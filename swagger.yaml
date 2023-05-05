@@ -1577,7 +1577,7 @@ components:
 
     PassiveExposureMeasurement:
       type: object
-      description: Single pasive exposure measurement
+      description: Single passive exposure measurement
       properties:
         id:
           type: string
@@ -1588,6 +1588,10 @@ components:
           readOnly: true
         airQuality:
           $ref: "#/components/schemas/AirQuality"
+        inside:
+          type: boolean
+          description: Whether the user is inside or outside
+          readOnly: true
 
     Route:
       type: object
