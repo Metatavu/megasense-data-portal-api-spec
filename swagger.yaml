@@ -1590,7 +1590,7 @@ components:
           $ref: "#/components/schemas/AirQuality"
         inside:
           type: boolean
-          description: Whether the user is inside or outside
+          description: Indicates that measurement is taken indoors
           readOnly: true
 
     Route:
