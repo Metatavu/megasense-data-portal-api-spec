@@ -1639,6 +1639,10 @@ components:
           type: number
           format: float
           description: Length of the saved route in meters
+        routeTime:
+          type: integer
+          format: int64
+          description: Time of the saved route in seconds
     Error:
       type: object
       required:
