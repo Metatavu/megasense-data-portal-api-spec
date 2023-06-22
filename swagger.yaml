@@ -1603,12 +1603,12 @@ components:
       type: string
       description: Time unit for passive exposure measurement
       enum:
-        - 15MIN
-        - 1HOUR
-        - 1DAY
-        - 1WEEK
-        - 1MONTH
-        - 1YEAR
+        - MIN15
+        - HOUR
+        - DAY
+        - WEEK
+        - MONTH
+        - YEAR
 
     Route:
       type: object
