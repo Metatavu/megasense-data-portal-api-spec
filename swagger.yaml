@@ -390,6 +390,12 @@ paths:
           schema:
             type: string
             format: date-time
+        - name: timeUnit
+          in: query
+          description: Time unit for the results. If not given, the default value is used.
+          required: false
+          schema:
+            $ref: "#/components/schemas/PassiveExposureMeasurementTimeUnit"
       responses:
         "200":
           description: An array of exposure instances
@@ -1592,6 +1598,17 @@ components:
           type: boolean
           description: Indicates that measurement is taken indoors
           readOnly: true
+
+    PassiveExposureMeasurementTimeUnit:
+      type: string
+      description: Time unit for passive exposure measurement
+      enum:
+        - MIN15
+        - HOUR
+        - DAY
+        - WEEK
+        - MONTH
+        - YEAR
 
     Route:
       type: object
