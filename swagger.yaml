@@ -1801,9 +1801,19 @@ components:
           type: string
           description: Pollutant variable name for NetCDF file indexing
         limit:
+          description: Maximum allowed concentration of pollutant that user can be exposed to
           type: number
           format: float
         recommendation:
+          description: Recommended concentration of pollutant that user can be exposed to
+          type: number
+          format: float
+        recommendationExposure15Minutes:
+          description: Recommended max exposure for 15 minutes (total sum of consumed pollutant)
+          type: number
+          format: float
+        limitExposure15Minutes:
+          description: Limit max exposure for 15 minutes (total sum of consumed pollutant)
           type: number
           format: float
         requestParameters:
