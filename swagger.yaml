@@ -1808,8 +1808,12 @@ components:
           description: Recommended concentration of pollutant that user can be exposed to
           type: number
           format: float
-        recommendedExposure15Minutes:
-          description: Recommended exposure for 15 minutes (total sum of consumed pollutant)
+        recommendationExposure15Minutes:
+          description: Recommended max exposure for 15 minutes (total sum of consumed pollutant)
+          type: number
+          format: float
+        limitExposure15Minutes:
+          description: Limit max exposure for 15 minutes (total sum of consumed pollutant)
           type: number
           format: float
         requestParameters:
