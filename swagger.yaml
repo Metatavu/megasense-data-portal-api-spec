@@ -345,7 +345,34 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-
+  /v1/precalculatedPassiveExposure:
+    get:
+      summary: Lists precalculated passive exposure measurements for a user
+      operationId: listPrecalculatedPassiveExposureMeasurements
+      description: Lists precalculated passive exposure measurement for given time range
+      parameters:
+        - name: precalculatedExposureType
+          in: query
+          required: true
+          schema:
+            $ref: "#/components/schemas/PrecalculatedExposureType"
+      tags:
+        - PassiveExposureMeasurements
+      responses:
+        "200":
+          description: An array of exposure instances
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PassiveExposureMeasurement"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"      
   /v1/passiveExposure:
     post:
       summary: Request passive exposure measurement
@@ -1599,6 +1626,13 @@ components:
           description: Indicates that measurement is taken indoors
           readOnly: true
 
+    PrecalculatedExposureType:
+      type: string
+      description: Type of precalculated exposure
+      enum:
+        - WEEK
+        - MONTH
+        - YEAR
     PassiveExposureMeasurementTimeUnit:
       type: string
       description: Time unit for passive exposure measurement
