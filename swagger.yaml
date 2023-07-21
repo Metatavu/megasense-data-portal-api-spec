@@ -345,6 +345,21 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /v1/precalculateExposure:
+    put:
+      summary: Starts a background task precalculate exposure
+      operationId: Starts a background task to precalculate exposure
+      tags:
+        - PassiveExposureMeasurements
+      responses:
+        "202":
+          description: The request has been accepted for processing. Measurement is not necessarily ready yet but has been accepted to be processed in the near future. 
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /v1/precalculatedPassiveExposure:
     get:
       summary: Lists precalculated passive exposure measurements for a user
