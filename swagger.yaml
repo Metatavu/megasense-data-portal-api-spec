@@ -348,7 +348,7 @@ paths:
   /v1/precalculateExposure:
     put:
       summary: Starts a background task precalculate exposure
-      operationId: Starts a background task to precalculate exposure
+      operationId: precalculateExposure
       tags:
         - PassiveExposureMeasurements
       responses:
