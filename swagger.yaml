@@ -1594,10 +1594,9 @@ components:
           readOnly: true
         airQuality:
           $ref: "#/components/schemas/AirQuality"
-        inside:
-          type: boolean
-          description: Indicates that measurement is taken indoors
-          readOnly: true
+        timeUnit:
+          $ref: "#/components/schemas/PassiveExposureMeasurementTimeUnit"
+          description: Time unit for the results.
 
     PassiveExposureMeasurementTimeUnit:
       type: string
