@@ -1901,8 +1901,8 @@ components:
       type: object
       description: Read-only air quality data for the array of coordinates of the route and corresponding exposure values
       required:
-        - airQualityEntries
-        - exposureValues
+        - pollutionValuesForRoute
+        - exposureValuesForRoute
       properties:
         pollutionValuesForRoute:
           description: List of air qualities for the coordinates passed in original request
@@ -1910,7 +1910,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/AirQuality"
-        exposureValues:
+        exposureValuesForRoute:
           description: List of exposure entries that user breathed in during the route (for dial)
           type: array
           items:
