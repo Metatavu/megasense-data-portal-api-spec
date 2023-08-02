@@ -1557,7 +1557,7 @@ components:
         endedAt:
           type: string
           format: date-time
-        exposureValues:
+        exposureMeasurements:
           description: List of exposure entries that user breathed in during the route (for dial)
           type: array
           items:
@@ -1608,6 +1608,8 @@ components:
       type: string
       description: Time unit for passive exposure measurement
       enum:
+        - MIN1
+        - MIN5
         - MIN15
         - HOUR
         - DAY
