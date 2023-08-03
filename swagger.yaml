@@ -219,7 +219,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/RoutePollutionExposureRecord"
+                type: array
+                items:
+                  $ref: "#/components/schemas/PollutionEntry"
         default:
           description: unexpected error
           content:
