@@ -1572,7 +1572,7 @@ components:
 
     ExposureMeasurement:
       type: object
-      description: Single exposure measurement, can be usued both for passive measurements and route measurements.
+      description: Single exposure measurement, can be usued both for passive exposure measurements and route exposure measurements.
       required:
         - time
         - airQuality
