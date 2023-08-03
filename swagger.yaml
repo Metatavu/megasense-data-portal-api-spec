@@ -1565,7 +1565,7 @@ components:
           items:
             $ref: "#/components/schemas/ExposureMeasurement"
         pollutionValuesForRoute:
-          description: List of air quality entries for all the route points (for map coloring)
+          description: List of air quality concentration entries for all the route points (i.e. for route line coloring)
           type: array
           items:
             $ref: "#/components/schemas/AirQuality"
