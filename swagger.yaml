@@ -579,7 +579,32 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-
+  /v1/users/getByEmail:
+    get:
+      summary: Gets user by the user email
+      operationId: getUserByEmail
+      tags:
+        - Users
+      parameters:
+        - name: email
+          required: true
+          in: query
+          description: user id
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
   /v1/users/{userId}:
     get:
       summary: Gets user settings by the user id
