@@ -394,8 +394,8 @@ paths:
             format: date-time
         - name: timeUnit
           in: query
-          description: Time unit for the results. If not given, the default value is used.
-          required: false
+          description: Time unit for the results. MIN15 is allowed only for requests which are max 1 day long.
+          required: true
           schema:
             $ref: "#/components/schemas/ExposureMeasurementTimeUnit"
       responses:
