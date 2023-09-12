@@ -1809,6 +1809,7 @@ components:
         - unit
         - variableName
         - requestParameters
+        - pollutionOverlayLimit
       properties:
         id:
           type: string
@@ -1838,6 +1839,10 @@ components:
           format: float
         limitExposure15Minutes:
           description: Limit max exposure for 15 minutes (total sum of consumed pollutant)
+          type: number
+          format: float
+        pollutionOverlayLimit:
+          description: Limit of pollution level that will be used for map overlay styling
           type: number
           format: float
         requestParameters:
