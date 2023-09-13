@@ -1840,6 +1840,10 @@ components:
           description: Limit max exposure for 15 minutes (total sum of consumed pollutant)
           type: number
           format: float
+        pollutionOverlayLimit:
+          description: Limit of pollution level that will be used for map overlay styling
+          type: number
+          format: float
         requestParameters:
           $ref: "#/components/schemas/PollutantRequestParameter"
           description: Parameter that is used for OTP routing for the given pollutant
