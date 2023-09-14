@@ -1819,6 +1819,9 @@ components:
         displayName:
           type: string
           description: Displayed name for a pollutant
+        shortName:
+          type: string
+          description: Short name for a pollutant
         unit:
           type: string
         variableName:
