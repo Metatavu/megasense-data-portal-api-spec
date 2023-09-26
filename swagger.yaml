@@ -1425,7 +1425,7 @@ paths:
 
   /v1/pollutants/{pollutantId}/style:
     get:
-      summary: Finds a pollutant color codes list that are used by geoserver. Updates to the style's values and colors happen when pollutant is updated with new pollutionOverlayLimit properties.
+      summary: Finds a list of pollutant color codes that are used by geoserver. Updates to the style's values and colors happen when pollutant is updated with new pollutionOverlayLimit properties.
       operationId: findPollutantColorCodes
       tags:
         - Pollutants
