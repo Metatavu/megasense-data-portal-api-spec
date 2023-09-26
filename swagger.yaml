@@ -1423,6 +1423,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /v1/pollutants/{pollutantId}/style:
+    get:
+      summary: Finds a pollutant color codes list that are used by geoserver. Updates to the style's values and colors happen when pollutant is updated with new pollutionOverlayLimit properties.
+      operationId: findPollutantColorCodes
+      tags:
+        - Pollutants
+      parameters:
+        - name: pollutantId
+          in: path
+          description: Pollutant id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A found pollutant's color code and value list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PollutantColorCode"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /v1/routingModes:
     get:
       summary: Lists all default routing modes
@@ -2028,6 +2058,16 @@ components:
           type: boolean
         elevation:
           type: string
+
+    PollutantColorCode:
+      type: object
+      description: Pollutant's color code and values for map overlay
+      properties:
+        colorCode:
+          type: string
+        value:
+          type: number
+          format: float
 
     StripeProductPrice:
       type: object
