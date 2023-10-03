@@ -219,7 +219,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/RoutePollutionExposureRecord"
+                type: array
+                items:
+                  $ref: "#/components/schemas/PollutionEntry"
         default:
           description: unexpected error
           content:
@@ -395,7 +397,7 @@ paths:
           description: Time unit for the results. MIN15 is allowed only for requests which are max 1 day long.
           required: true
           schema:
-            $ref: "#/components/schemas/PassiveExposureMeasurementTimeUnit"
+            $ref: "#/components/schemas/ExposureMeasurementTimeUnit"
       responses:
         "200":
           description: An array of exposure instances
@@ -404,7 +406,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/PassiveExposureMeasurement"
+                  $ref: "#/components/schemas/ExposureMeasurement"
         default:
           description: unexpected error
           content:
@@ -1421,6 +1423,36 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
+  /v1/pollutants/{pollutantId}/style:
+    get:
+      summary: Finds a list of pollutant color codes that are used by geoserver. Updates to the style's values and colors happen when pollutant is updated with new pollutionOverlayLimit properties.
+      operationId: findPollutantColorCodes
+      tags:
+        - Pollutants
+      parameters:
+        - name: pollutantId
+          in: path
+          description: Pollutant id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: A found pollutant's color code and value list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PollutantColorCode"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
   /v1/routingModes:
     get:
       summary: Lists all default routing modes
@@ -1568,7 +1600,7 @@ components:
   schemas:
     RoutePollutionExposureRecord:
       type: object
-      description: Historical entry of the pollutants and exposure that the user encountered. Not requested in real-time but preserved in the database.
+      description: Historical entry of the route pollution information.
       properties:
         id:
           type: string
@@ -1582,17 +1614,40 @@ components:
         endedAt:
           type: string
           format: date-time
+        exposureMeasurements:
+          description: List of exposure entries that user breathed in during the route (for dial)
+          type: array
+          items:
+            $ref: "#/components/schemas/ExposureMeasurement"
         pollutionValuesForRoute:
-          description: List of air quality entries for all the route points
+          description: List of air quality concentration entries for all the route points (i.e. for route line coloring)
           type: array
           items:
             $ref: "#/components/schemas/AirQuality"
-        pollutionDataTotals:
-          description: List of pollution exposure entries that user breathed during travelling the route
+
+    ExposureMeasurement:
+      type: object
+      description: Single exposure measurement, can be usued both for passive exposure measurements and route exposure measurements.
+      required:
+        - time
+        - airQuality
+      properties:
+        id:
+          type: string
+          format: uuid
+        time:
+          type: string
+          format: date-time
+          readOnly: true
+        exposureValues:
+          description: List of exposure entries that user breathed in.
           type: array
           items:
             $ref: "#/components/schemas/PollutionEntry"
-    
+        timeUnit:
+          $ref: "#/components/schemas/ExposureMeasurementTimeUnit"
+          description: Time unit for the results.
+
     PassiveExposureMeasurementRequest: 
       type: object
       description: Passive exposure collection request. Object is used to create requests of passive exposure collection from the API
@@ -1606,27 +1661,12 @@ components:
         location:
           $ref: "#/components/schemas/Location"
 
-    PassiveExposureMeasurement:
-      type: object
-      description: Single passive exposure measurement
-      properties:
-        id:
-          type: string
-          format: uuid
-        time:
-          type: string
-          format: date-time
-          readOnly: true
-        airQuality:
-          $ref: "#/components/schemas/AirQuality"
-        timeUnit:
-          $ref: "#/components/schemas/PassiveExposureMeasurementTimeUnit"
-          description: Time unit for the results.
-
-    PassiveExposureMeasurementTimeUnit:
+    ExposureMeasurementTimeUnit:
       type: string
       description: Time unit for passive exposure measurement
       enum:
+        - MIN1
+        - MIN5
         - MIN15
         - HOUR
         - DAY
@@ -1927,21 +1967,20 @@ components:
       type: object
       description: Read-only air quality data for the array of coordinates of the route and corresponding exposure values
       required:
-        - airQualityEntries
-        - pollutionDataTotals
+        - pollutionValuesForRoute
+        - exposureValuesForRoute
       properties:
-        airQualityEntries:
+        pollutionValuesForRoute:
           description: List of air qualities for the coordinates passed in original request
           readOnly: true
           type: array
           items:
             $ref: "#/components/schemas/AirQuality"
-        pollutionDataTotals:
-          description: List of exposure values that the user would consume during the trip along the coordinates route for the given time
-          readOnly: true
+        exposureValuesForRoute:
+          description: List of exposure entries that user breathed in during the route (for dial)
           type: array
           items:
-            $ref: "#/components/schemas/PollutionEntry"
+            $ref: "#/components/schemas/ExposureMeasurement"
 
     DefaultRoutingMode:
       type: object
@@ -2022,6 +2061,16 @@ components:
           type: boolean
         elevation:
           type: string
+
+    PollutantColorCode:
+      type: object
+      description: Pollutant's color code and values for map overlay
+      properties:
+        colorCode:
+          type: string
+        value:
+          type: number
+          format: float
 
     StripeProductPrice:
       type: object
