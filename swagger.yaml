@@ -1622,6 +1622,7 @@ components:
           format: date-time
         exposureMeasurements:
           description: List of exposure entries that user breathed in during the route (for dial)
+          readOnly: true
           type: array
           items:
             $ref: "#/components/schemas/ExposureMeasurement"
@@ -1985,11 +1986,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/AirQuality"
-        exposureValuesForRoute:
-          description: List of exposure entries that user breathed in during the route (for dial)
-          type: array
-          items:
-            $ref: "#/components/schemas/ExposureMeasurement"
 
     DefaultRoutingMode:
       type: object
