@@ -1633,7 +1633,7 @@ components:
             $ref: "#/components/schemas/AirQuality"
         timeUnit:
           $ref: "#/components/schemas/ExposureMeasurementTimeUnit"
-          description: Time unit for the results if any
+          description: Time unit for customizing the interval of the results
 
     ExposureMeasurement:
       type: object
