@@ -312,6 +312,12 @@ paths:
           schema:
             type: string
             format: uuid
+        - name: timeUnit
+          in: query
+          description: Time unit for the results. If none is provided, results are returned for each route point.
+          required: false
+          schema:
+            $ref: "#/components/schemas/ExposureMeasurementTimeUnit"
       responses:
         "200":
           description: A found exposure instance
@@ -1625,6 +1631,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/AirQuality"
+        timeUnit:
+          $ref: "#/components/schemas/ExposureMeasurementTimeUnit"
+          description: Time unit for customizing the interval of the results
 
     ExposureMeasurement:
       type: object
