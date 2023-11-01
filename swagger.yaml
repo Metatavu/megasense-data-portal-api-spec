@@ -283,6 +283,12 @@ paths:
           schema:
             type: string
             format: date-time
+        - name: timeUnit
+          in: query
+          description: Time unit for the results. If none is provided, results are returned for each route point.
+          required: false
+          schema:
+            $ref: "#/components/schemas/ExposureMeasurementTimeUnit"
       responses:
         "200":
           description: An array of exposure instances
