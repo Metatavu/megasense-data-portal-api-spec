@@ -1981,7 +1981,7 @@ components:
         activeSubscriptionType:
           type: string
           $ref: "#/components/schemas/SubscriptionType"
-          description: status of subscription
+          description: type of subscription
 
     RoutePointsAirQuality:
       type: object
@@ -2162,7 +2162,7 @@ components:
       description: Type of subscription
       enum:
         - STRIPE
-        - APPLE
+        - APPLE_IAP
 
     StripeInvoice:
       type: object
