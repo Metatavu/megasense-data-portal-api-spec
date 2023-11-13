@@ -1977,11 +1977,12 @@ components:
         subscriptionStatus:
           type: string
           $ref: "#/components/schemas/SubscriptionStatus"
-          description: status of subscription
-        activeSubscriptionType:
-          type: string
-          $ref: "#/components/schemas/SubscriptionType"
-          description: type of subscription
+          description: status of subscription. If any subscription is active, this will be ACTIVE.
+        activeSubscriptionTypes:
+          type: array
+          items:
+            $ref: "#/components/schemas/SubscriptionType"
+          description: types of subscriptions in currently ACTIVE state. Normally should have only one element.
 
     RoutePointsAirQuality:
       type: object
