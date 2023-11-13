@@ -2160,7 +2160,7 @@ components:
 
     SubscriptionType:
       type: string
-      description: Type of subscription
+      description: Type of active subscription
       enum:
         - STRIPE
         - APPLE_IAP
