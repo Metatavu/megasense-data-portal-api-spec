@@ -1938,7 +1938,6 @@ components:
         - email
         - showMobileWelcomeScreen
         - pollutantPenalties
-        - trialAvailable
       properties:
         id:
           type: string
@@ -1982,6 +1981,7 @@ components:
         trialAvailable:
           type: boolean
           description: if user is eligible for trial subscription
+          readOnly: true
         activeSubscriptionTypes:
           type: array
           items:
@@ -2141,6 +2141,10 @@ components:
         trial:
           description: if it's a trial subscription
           type: boolean
+        trialEndsAt:
+          description: trial end date timestamp
+          type: integer
+          format: int64
         invoices:
           type: array
           items:
@@ -2160,7 +2164,7 @@ components:
       type: string
       description: NOT_INITIATED is the initial status which is not yet set up in payment system, 
         ACTIVE means subscription with functional payments, 
-        TRIAL is Stripe-only version of ACTIVE status,
+        TRIAL is Stripe-only version of a trial period ACTIVE status,
         NOT_PAID is status where payments are not working,
         ENDED is for cancelled and unpaid subscriptions
       enum:
