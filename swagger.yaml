@@ -1938,6 +1938,7 @@ components:
         - email
         - showMobileWelcomeScreen
         - pollutantPenalties
+        - trialAvailable
       properties:
         id:
           type: string
