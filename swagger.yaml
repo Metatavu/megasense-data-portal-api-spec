@@ -1978,6 +1978,9 @@ components:
           type: string
           $ref: "#/components/schemas/SubscriptionStatus"
           description: status of subscription. If any subscription is active, this will be ACTIVE.
+        trialAvailable:
+          type: boolean
+          description: if user is eligible for trial subscription
         activeSubscriptionTypes:
           type: array
           items:
@@ -2134,6 +2137,9 @@ components:
         defaultPaymentMethodId:
           description: ID of default payment method
           type: string
+        trial:
+          description: if it's a trial subscription
+          type: boolean
         invoices:
           type: array
           items:
@@ -2151,10 +2157,15 @@ components:
 
     SubscriptionStatus:
       type: string
-      description: Status where NOT_INITIATED is the initial status which is not yet set up in payment system, ACTIVE means subscription with functional payments, NOT_PAID is status where payments are not working, ENDED is for cancelled and unpaid subscriptions
+      description: NOT_INITIATED is the initial status which is not yet set up in payment system, 
+        ACTIVE means subscription with functional payments, 
+        TRIAL is Stripe-only version of ACTIVE status,
+        NOT_PAID is status where payments are not working,
+        ENDED is for cancelled and unpaid subscriptions
       enum:
         - NOT_INITIATED
         - ACTIVE
+        - TRIAL
         - NOT_PAID
         - ENDED
 
