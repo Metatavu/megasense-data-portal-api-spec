@@ -701,6 +701,30 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  /v1/users/{userId}/email:
+    post:
+      operationId: resendVerificationEmail
+      summary: Resends verification email
+      description: Resends verification email
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          description: The user to be updated
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Email sent successfully
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
   "/v1/users/{userId}/cards":
     get:
