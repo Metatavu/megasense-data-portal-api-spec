@@ -410,15 +410,19 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/ExposureMeasurementTimeUnit"
+        - name: format
+          in: query
+          description: Format of the response. If not provided, format of ExposureMeasurement is used inside the list
+          required: false
+          schema:
+            $ref: "#/components/schemas/ExposureMeasurementFormat"
       responses:
         "200":
           description: An array of exposure instances
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/ExposureMeasurement"
+                $ref: "#/components/schemas/ExposureMeasurementList"
         default:
           description: unexpected error
           content:
@@ -1687,6 +1691,48 @@ components:
         timeUnit:
           $ref: "#/components/schemas/ExposureMeasurementTimeUnit"
           description: Time unit for the results.
+
+    FormattedExposureMeasurement:
+      type: object
+      description: Single exposure measurement formatted to be used in exposure dial
+      properties:
+        index:
+          description: degrees of the time unit on the dial
+          type: integer
+          format: int64
+        combined:
+          description: combined value of provided exposure values
+          type: number
+          format: float
+        exposureValues:
+          description: List of exposure entries that user breathed in.
+          type: array
+          items:
+            $ref: "#/components/schemas/PollutionEntry"
+
+    ExposureMeasurementFormat:
+      description: format of the requested and received exposure records
+      type: string
+      enum:
+        - STANDARD
+        - DIAL_PREPROCESSED
+
+    ExposureMeasurementList:
+      type: object
+      description: Exposure measurement list that can contain data in one of 2 possible formats
+      required:
+        - format
+      properties:
+        format:
+          $ref: "#/components/schemas/ExposureMeasurementFormat"
+        exposureMeasurements:
+          type: array
+          items:
+              $ref: "#/components/schemas/ExposureMeasurement"
+        exposureMeasurementsFormatted:
+          type: array
+          items:
+            $ref: "#/components/schemas/FormattedExposureMeasurement"
 
     PassiveExposureMeasurementRequest: 
       type: object
