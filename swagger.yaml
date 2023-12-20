@@ -730,7 +730,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  "/v1/users/{userId}/cards":
+  "/v1/users/{userId}/stripe/cards":
     get:
       operationId: listUserStripeCards
       summary: Lists user cards
@@ -795,7 +795,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  "/v1/users/{userId}/cards/checkout":
+  "/v1/users/{userId}/stripe/cards/checkout":
     post:
       operationId: createUserStripeCardIntent
       summary: Create user card setup intent
@@ -825,7 +825,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  "/v1/users/{userId}/cards/{cardId}":
+  "/v1/users/{userId}/stripe/cards/{cardId}":
     get:
       operationId: findUserStripeCard
       summary: Finds user card
@@ -929,9 +929,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /v1/users/{userId}/subscriptions:
+  /v1/users/{userId}/stripe/subscriptions:
     get:
-      summary: Lists user subscriptions
+      summary: Lists user stripe subscriptions
       operationId: listUserStripeSubscriptions
       tags:
         - Subscription
@@ -992,7 +992,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
 
-  /v1/users/{userId}/subscriptions/{subscriptionId}:
+  /v1/users/{userId}/stripe/subscriptions/{subscriptionId}:
     get:
       summary: Find user subscription
       operationId: findUserStripeSubscription
