@@ -1698,8 +1698,8 @@ components:
       properties:
         index:
           description: degrees of the time unit on the dial
-          type: integer
-          format: int64
+          type: number
+          format: float
         combined:
           description: combined value of provided exposure values
           type: number
