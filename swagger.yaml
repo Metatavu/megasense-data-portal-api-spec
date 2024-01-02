@@ -1700,6 +1700,10 @@ components:
           description: degrees of the time unit on the dial
           type: number
           format: float
+        time:
+          type: string
+          format: date-time
+          readOnly: true
         combined:
           description: combined value of provided exposure values
           type: number
