@@ -418,11 +418,13 @@ paths:
             $ref: "#/components/schemas/ExposureMeasurementFormat"
       responses:
         "200":
-          description: An array of exposure instances
+          description: An array of exposure instances, can be either ExposureMeasurement or FormattedExposureMeasurement
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ExposureMeasurementList"
+                type: array
+                items:
+                  type: object
         default:
           description: unexpected error
           content:
@@ -1720,23 +1722,6 @@ components:
       enum:
         - STANDARD
         - DIAL_PREPROCESSED
-
-    ExposureMeasurementList:
-      type: object
-      description: Exposure measurement list that can contain data in one of 2 possible formats
-      required:
-        - format
-      properties:
-        format:
-          $ref: "#/components/schemas/ExposureMeasurementFormat"
-        exposureMeasurements:
-          type: array
-          items:
-              $ref: "#/components/schemas/ExposureMeasurement"
-        exposureMeasurementsFormatted:
-          type: array
-          items:
-            $ref: "#/components/schemas/FormattedExposureMeasurement"
 
     PassiveExposureMeasurementRequest: 
       type: object
